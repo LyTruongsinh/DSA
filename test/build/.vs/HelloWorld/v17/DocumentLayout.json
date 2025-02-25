@@ -1,0 +1,40 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Desktop\\Data_Structures_and_Algorithms\\test\\build\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{257617C8-005E-3BDD-9CD8-F5A29CC437E0}|test.vcxproj|C:\\Users\\Admin\\OneDrive\\Desktop\\Data_Structures_and_Algorithms\\test\\src\\test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "test.cpp",
+              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Desktop\\Data_Structures_and_Algorithms\\test\\src\\test.cpp",
+              "RelativeDocumentMoniker": "..\\src\\test.cpp",
+              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Desktop\\Data_Structures_and_Algorithms\\test\\src\\test.cpp",
+              "RelativeToolTip": "..\\src\\test.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-02-23T16:12:33.822Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

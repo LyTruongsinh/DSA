@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.html": "django-html",
+    "xstring": "cpp",
+    "cmath": "cpp",
+    "iostream": "cpp",
+    "vector": "cpp",
+    "stack": "cpp"
+  }
+}

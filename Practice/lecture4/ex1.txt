@@ -1,0 +1,3 @@
+Hai tính chất quan trọng của một hàm băm là:
+1. Tính đồng nhất (Uniformity): Hàm băm nên phân phối các giá trị băm một cách đồng đều trên không gian đầu ra. Điều này giúp giảm thiểu xung đột (collision) giữa các giá trị đầu vào khác nhau và đảm bảo hiệu suất tốt hơn trong các ứng dụng như bảng băm.
+2. Tính kháng va chạm (Collision Resistance): Khả năng chống va chạm nghĩa là rất khó tìm được hai giá trị đầu vào khác nhau nhưng có cùng giá trị băm. Điều này đặc biệt quan trọng trong lĩnh vực bảo mật, như mật mã học, để ngăn chặn các cuộc tấn công lợi dụng va chạm hàm băm.

@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\build",
+    "\\build\\x64-Debug",
+    "\\build\\x64-Debug\\CMakeFiles",
+    "\\build\\x64-Debug\\CMakeFiles\\test.dir",
+    "\\build\\x64-Debug\\Testing",
+    "\\build\\x64-Debug\\Testing\\Temporary"
+  ],
+  "SelectedNode": "\\build\\x64-Debug\\CMakeFiles",
+  "PreviewInSolutionExplorer": false
+}

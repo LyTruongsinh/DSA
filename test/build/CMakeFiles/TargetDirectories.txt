@@ -1,0 +1,3 @@
+C:/Users/Admin/OneDrive/Desktop/Data_Structures_and_Algorithms/test/build/CMakeFiles/test.dir
+C:/Users/Admin/OneDrive/Desktop/Data_Structures_and_Algorithms/test/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Admin/OneDrive/Desktop/Data_Structures_and_Algorithms/test/build/CMakeFiles/ZERO_CHECK.dir

@@ -1,0 +1,10 @@
+^C:\USERS\ADMIN\ONEDRIVE\DESKTOP\DATA_STRUCTURES_AND_ALGORITHMS\TEST\BUILD\CMAKEFILES\6C99E65C692AC92E8515936B7B043F26\GENERATE.STAMP.RULE
+setlocal
+D:\CMake\bin\cmake.exe -SC:/Users/Admin/OneDrive/Desktop/Data_Structures_and_Algorithms/test -BC:/Users/Admin/OneDrive/Desktop/Data_Structures_and_Algorithms/test/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Admin/OneDrive/Desktop/Data_Structures_and_Algorithms/test/build/HelloWorld.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

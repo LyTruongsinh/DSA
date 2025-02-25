@@ -1,0 +1,14 @@
+4nlogn + 2n  có Big-O O(nlogn)
+3n + 100logn có Big-O O(n)
+n^2 + 10n có Big-O O(n^2)
+n^3 có Big-O O(n^3)
+4n có Big-O O(n)
+nlogn có Big-O O(nlogn)
+2^(logn) có Big-O O(n^0.301)
+2^10 có Big-O O(1)
+2^n có Big-0 O(2^n)
+
+thứ tự sắp xếp của Big-O
+O(1) < O(logn) < O(n) < O(nlogn) < O(n^2) < O(n^2) < O(n^3) < O(2^n)
+=>
+2^10 < 3n + 100logn < 4n < 2^logn < nlogn < 4nlogn + 2n < n^2 + 10n < n^3 < 2^n
