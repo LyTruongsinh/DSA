@@ -1,57 +1,71 @@
 #include <iostream>
-#include <queue>
-#include <sstream>
 
 using namespace std;
 
-void enqueue(queue<int> &q, int x)
-{
-    q.push(x);
-}
+// Định nghĩa Node của danh sách liên kết
+struct Node {
+    int data;
+    Node* next;
+};
 
-void dequeue(queue<int> &q)
-{
-    if (!q.empty())
-    {
-        q.pop();
+
+struct Queue {
+    Node* front; // Con trỏ đến phần tử đầu tiên
+    Node* rear;  // Con trỏ đến phần tử cuối cùng
+    Queue() {
+        front = rear = NULL;
     }
-}
-
-void processCommands(int n)
-{
-    queue<int> q;
-
-    for (int i = 0; i < n; i++)
-    {
-        string s;
-        cin >> s;
-        if (s == "enqueue")
-        {
-            int x;
-            cin >> x;
-            enqueue(q, x);
-        }
-        else if (s == "dequeue")
-        {
-            dequeue(q);
+    void enqueue(int x) {
+        Node* temp = new Node();
+        temp->data = x;
+        temp->next = NULL;
+        if (rear == NULL) {
+            front = rear = temp;
+        } else {
+            rear->next = temp;
+            rear = temp;
         }
     }
-
-    // In kết quả hàng đợi
-    while (!q.empty())
-    {
-        cout << q.front() << " ";
-        q.pop();
+    void dequeue() {
+        if (front == NULL) return; 
+        Node* temp = front;
+        front = front->next;
+        if (front == NULL) rear = NULL; 
+        delete temp;
     }
-}
+    void printQueue() {
+        if (front == NULL) {
+            cout << "Queue is empty";
+            return;
+        }
+        Node* temp = front;
+        while (temp != NULL) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+    }
+};
 
-int main()
-{
+int main() {
     int n;
     cin >> n;
-    cin.ignore();
+    Queue q;
 
-    processCommands(n);
+    for (int i = 0; i < n; i++) {
+        string command;
+        cin >> command;
+
+        if (command == "enqueue") {
+            int x;
+            cin >> x;
+            q.enqueue(x);
+        } else if (command == "dequeue") {
+            q.dequeue();
+        }
+    }
+
+    // In kết quả
+    q.printQueue();
 
     return 0;
 }
