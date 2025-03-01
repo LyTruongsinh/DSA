@@ -1,24 +1,28 @@
 #include <iostream>
 #include <stack>
+#include <vector>
+#define MAX 10000
 using namespace std;
-class TreeNode
+int f[MAX] = {0};
+struct TreeNode
 {
-public:
     int val;
     TreeNode *left;
     TreeNode *right;
-
     TreeNode(int x) : val(x), left(NULL), right(NULL) {};
+};
+class Solution
+{
+public:
     int Height_Tree(TreeNode *root)
     {
         if (root == NULL)
             return 0;
         int countLeft = 1 + Height_Tree(root->left);
         int countRight = 1 + Height_Tree(root->right);
-        if (countLeft < countRight)
-            return countRight;
-        return countLeft;
+        return max(countLeft, countRight);
     }
+
     void printPreorder(TreeNode *root)
     {
         if (root == NULL)
@@ -44,7 +48,8 @@ public:
                 {
                     cout << children.top()->val << " ";
                     children.pop();
-                    if(children.empty()) break;
+                    if (children.empty())
+                        break;
                     cur = NULL;
                 }
                 else
@@ -55,21 +60,81 @@ public:
             }
         }
     }
+    void inorderTraversal(TreeNode* root) {
+        stack<TreeNode*> st;
+        TreeNode* cur = root;
+    
+        while (cur != NULL || !st.empty()) {
+            while (cur != NULL) { 
+                st.push(cur);  
+                cur = cur->left;
+            }
+    
+            cur = st.top();
+            st.pop();   
+            cout << cur->val << " ";
+            
+            cur = cur->right; 
+        }
+    }
 
-    void printInorder(struct TreeNode* root)
-{
-    if (root == NULL)
-        return;
-    printInorder(root->left);
-    cout << root->val << " ";
-    printInorder(root->right);
-}
+
+
+
+    
 };
 int main()
 {
-    int N, M;
-    cin >> N >> M;
-    for(int i = 0; i < M;i++) {
-        
+    Solution s;
+    vector<TreeNode *> parents;
+    int M;
+    cout << "Nhap M = ";
+    cin >> M;
+    bool check = true;
+    for (int i = 0; i < M; i++)
+    {
+        int u, v;
+        cin >> u >> v;
+        f[u]++;
+        if (f[u] == 1)
+        {
+            {
+                parents.push_back(new TreeNode(u));
+                parents[parents.size() - 1]->left = new TreeNode(v);
+            }
+        }
+        if (f[u] == 2)
+        {
+            parents[parents.size() - 1]->right = new TreeNode(v);
+        }
+        if(f[u] == 1 || f[u] == 3) {
+            check = false;
+        }
     }
+    if(check) {
+        
+    for (int i = 0; i < parents.size(); i++)
+    {
+        if (parents[i] == NULL)
+            continue;
+        if (2 * i + 1 < parents.size() && parents[2 * i + 1] != NULL)
+        {
+            parents[i]->left = parents[2 * i + 1];
+        }
+
+        if (2 * i + 2 < parents.size() && parents[2 * i + 2] != NULL)
+        {
+            parents[i]->right = parents[2 * i + 2];
+        }
+    }
+    cout << "Height of tree : " << s.Height_Tree(parents[0]) - 1 << endl;
+    cout << "Preoder :" ;s.printPreorder(parents[0]);cout << endl;
+    cout << "Inorder : " ;s.inorderTraversal(parents[0]);cout << endl;
+    cout << "Postoder : " ;s.printPostorder(parents[0]); cout << endl;
+    }
+
+    else {
+        cout << "Graph is not a tree" << endl;
+    }
+    return 0;
 }
