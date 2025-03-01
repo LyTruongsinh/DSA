@@ -96,6 +96,20 @@ int main()
         int u, v;
         cin >> u >> v;
         f[u]++;
+
+
+        // đẩy hết các nốt cha vào 1 mảng 
+        // ví dụ trên   1
+        //            /   \ 
+        //           2     3
+        //          / \   / \ 
+        //         4   6 7   8
+        // Parents[ 1           2         3 ]
+        //        /   \       /   \     /   \ 
+        //       2     3     4     6   7     8
+        // 
+        // Prenst[i]->left = Parent[2*i + 1]
+        // Prenst[i]->right = Parent[2*i + 2]
         if (f[u] == 1)
         {
             {
