@@ -1,0 +1,107 @@
+// push  :O(1)
+// pop   :O(1)
+// Top   :O(1)
+// size  : O(n)
+
+STRUCT Node:
+    data: INTEGER
+    next: POINTER TO Node
+
+FUNCTION makeNode(x: INTEGER) -> POINTER TO Node:
+    newNode = NEW Node
+    newNode.data = x
+    newNode.next = NULL
+    RETURN newNode
+
+FUNCTION push(top: POINTER TO POINTER TO Node, x: INTEGER):
+    newNode = makeNode(x)
+    newNode.next = *top
+    *top = newNode
+
+FUNCTION pop(top: POINTER TO POINTER TO Node):
+    IF *top IS NOT NULL THEN
+        tmp = *top
+        *top = tmp.next
+        DELETE tmp
+
+FUNCTION Top(top: POINTER TO Node) -> INTEGER:
+    IF top IS NOT NULL THEN
+        RETURN top.data
+
+FUNCTION size(top: POINTER TO Node) -> INTEGER:
+    ans = 0
+    WHILE top IS NOT NULL DO
+        ans = ans + 1
+        top = top.next
+    RETURN ans
+
+FUNCTION main():
+    st = NULL
+    WHILE TRUE DO
+        PRINT "-------------------------------"
+        PRINT "1. push"
+        PRINT "2. pop"
+        PRINT "3. top"
+        PRINT "4. size"
+        PRINT "0. Thoat"
+        PRINT "-------------------------------"
+        INPUT lc
+        IF lc = 1 THEN
+            PRINT "Nhap x:"
+            INPUT x
+            push(&st, x)
+        ELSE IF lc = 2 THEN
+            pop(&st)
+        ELSE IF lc = 3 THEN
+            IF st IS NULL THEN
+                PRINT "EMPTY"
+            ELSE
+                PRINT Top(st)
+        ELSE IF lc = 4 THEN
+            PRINT size(st)
+        ELSE
+            BREAK
+
+
+##########################################################
+EXAMPLE
+CREATE st = NULL
+CALL FUNCTION push(st, 1)
+    newNode = CALL makeNode(1) = [1|NULL]
+    newNode.next = st  
+    st = [1|NULL]
+
+    [1|NULL] -> NULL
+    st
+--------------------------------------------
+CALL FUNCTION push(st, 2)
+    newNode = CALL makeNode(2) = [2|NULL]
+    newNode.next = [1|NULL]
+    st = [2|NULL]
+
+    [2|NULL] -> [1|NULL] -> NULL
+    st
+--------------------------------------------
+CALL FUNCTION push(st, 3)
+    newNode = CALL makeNode(3) = [3|NULL]
+    newNode.next = [2|NULL] -> [1|NULL] -> NULL
+    st = [3|NULL]
+
+    [3|NULL] -> [2|NULL] -> [1|NULL] -> NULL
+    st
+--------------------------------------------
+CALL FUNCTION pop(st, 3)
+    tmp = st
+    st = st.next
+    delete tmp
+
+    [2|NULL] -> [1|NULL] -> NULL
+    st
+--------------------------------------------
+CALL FUNCTION top(st) => st->data
+CALL FUNCTION size(st) => 
+     tmp != NULL 
+        ans += 1
+        tmp = tmp->next;
+     IF tmp == NULL THEN BREAK 
+    => ans

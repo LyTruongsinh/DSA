@@ -1,0 +1,83 @@
+// push(x)   :O(1)
+// pop(x)    :O(1)
+// top(x)    :O(1)
+// size(x)   :O(1)
+// print(x)  :O(n)
+
+
+
+CLASS Stack
+    INT arr[100]  // Mảng lưu dữ liệu của ngăn xếp
+    INT peek  // Chỉ số phần tử trên cùng của ngăn xếp
+
+    CONTRUCTOR
+        SET peek = -1  // Ngăn xếp rỗng
+
+    FUNCTION push(x) -> VOID
+        IF peek == 99 THEN
+            PRINT "Stack Overflow"
+        ELSE
+            peek = peek + 1
+            SET arr[peek] = x
+
+    FUNCTION pop() -> INT
+        IF peek == -1 THEN
+            PRINT "Stack is empty"
+            RETURN -1
+        ELSE
+            RETURN arr[peek] THEN DECREMENT peek
+
+    FUNCTION top() -> INT
+        IF peek == -1 THEN
+            PRINT "Stack is empty"
+            RETURN -1
+        ELSE
+            RETURN arr[peek]
+
+    FUNCTION size() -> INT
+        RETURN peek + 1
+
+    FUNCTION print() -> VOID
+        FOR i FROM 0 TO peek DO
+            PRINT arr[i], " "
+
+
+FUNCTION main()
+    DECLARE s AS Stack
+    WHILE TRUE DO
+        PRINT "---------------------"
+        PRINT "1. push"
+        PRINT "2. pop"
+        PRINT "3. top"
+        PRINT "4. size"
+        PRINT "0. Exit"
+        PRINT "---------------------"
+        
+        READ choice
+
+        SWITCH (choice)
+            CASE 1:
+                PRINT "Nhập số: "
+                READ x
+                CALL s.push(x)
+                CALL s.print()
+                PRINT ""
+                
+            CASE 2:
+                PRINT s.pop()
+                PRINT ""
+                
+            CASE 3:
+                PRINT s.top()
+                CALL s.print()
+                PRINT ""
+                
+            CASE 4:
+                PRINT s.size()
+                PRINT ""
+                
+            CASE 0:
+                EXIT PROGRAM
+                
+            DEFAULT:
+                PRINT "Lựa chọn không hợp lệ!"

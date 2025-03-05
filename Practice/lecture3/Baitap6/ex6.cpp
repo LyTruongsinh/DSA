@@ -37,9 +37,10 @@ int Top(node *top){
 
 int size(node *top){
 	int ans = 0;
-	while(top != NULL){
+	node *tmp = top;
+	while(tmp != NULL){
 		++ans;
-		top = top->next;
+		tmp = tmp->next;
 	}
 	return ans;
 }

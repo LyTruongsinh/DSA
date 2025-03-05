@@ -1,0 +1,90 @@
+// Enqueue (Thêm phần tử): O(1)
+// Dequeue (Xóa phần tử): O(1)
+// GetFront (Lấy phần tử đầu): O(1)
+// IsEmpty (Kiểm tra rỗng): O(1)
+
+DEFINE MAX_SIZE = 100
+
+CLASS Queue
+PRIVATE:
+    ARRAY arr[MAX_SIZE]
+    INTEGER front, rear, size
+PUBLIC:
+    CONTRUCTOR:
+    Queue : font = 0, rear = -1 , size = 0
+    -----------------------------------------
+    FUNCTION isEmpty -> BOOL
+    IF (size == 0) THEN 
+        RETURN true
+    -----------------------------------------
+    FUNCTION isFull -> BOOL
+    IF(SIZE == MAX_SIZE) THEN 
+        RETURN true
+    -----------------------------------------
+    FUNCTION ENQUEUE -> VOID
+    IF isFull() THEN 
+        PRINT "Queue is full"
+        RETURN
+    END IF
+        rear = (rear + 1) MOD MAX_SIZE
+        arr[rear] = x
+        size = size + 1 
+    -----------------------------------------
+    FUNCTION DEQUEUE -> VOID
+    IF isFull() THEN
+        PRINT "Queue is full!"
+        RETURN
+    END IF
+        front = (front + 1) MOD MAX_SIZE
+        size = size - 1
+    -----------------------------------------
+    FUNCTION getFront -> INTEGER
+    IF isEmpty() THEN
+        PRINT "Queue is empty!"
+        RETURN -1
+    END IF
+        RETURN arr[front]
+    -----------------------------------------
+    FUNCTION getSize -> INTEGER
+        RETURN size
+    -----------------------------------------
+BEGIN MAIN
+    CREATE Queue q
+    CALL q.enqueue(10)
+    CALL q.enqueue(20)
+    CALL q.enqueue(30)
+
+    PRINT "Front:", CALL q.getFront()
+
+    CALL q.dequeue()
+    PRINT "Front after dequeue:", CALL q.getFront()
+END MAIN
+
+#######################################################
+
+EXAMPLES
+CREATE Queue q : font = 0, rear = -1 , size = 0
+CALL FUNCTION enqueue(10) => {
+    rear = (rear + 1) % MAX_SIZE => rear = ( -1 + 1) % MAX_SIZE = 0
+    font = 0
+    a[0] = 10
+    size = 1 
+} 
+CURRENT q = [10] : font = 0, rear = 0 , size = 1
+--------------------------------------------------------------------
+CALL FUNCTION enqueue(20) => {
+    rear = (rear + 1) % MAX_SIZE => rear = ( 0 + 1) % MAX_SIZE = 1
+    font = 0
+    a[1] = 20
+    size = 2 
+}
+CURRENT q = [10, 20] : font = 0, rear = 1 , size = 2
+--------------------------------------------------------------------
+CALL FUNCTION enqueue(20) => {}
+CURRENT q = [10, 20, 30] : font = 0, rear = 2, size = 3
+--------------------------------------------------------------------
+CALL FUNCTION getFront() => q[font] = q[0] = 10
+CALL FUNCTION dequeue() => {
+    front = (front + 1) % MAX_SIZE = (0 + 1) % MAX_SIZE = 1
+    size = 3 - 1 = 2
+}

@@ -1,0 +1,44 @@
+
+Big O - O(n)
+FUNCTION power_iterative1(n: integer) -> real
+    result ← 1
+    FOR i FROM 0 TO |n| - 1 DO
+        result ← result * 2
+    END FOR
+    IF n < 0 THEN
+        RETURN 1 / result
+    ELSE
+        RETURN result
+    END IF
+END FUNCTION
+
+
+
+##############################################################################
+Big o - O(logn)
+FUNCTION power_recursive2(n: integer) -> real
+    IF n < 0 THEN
+        IF |n| = 0 THEN
+            RETURN 1
+        IF |n| MOD 2 = 0 THEN
+            RETURN 1 / (power_recursive2(n / 2) * power_recursive2(n / 2))
+        ELSE
+            RETURN 1 / (power_recursive2(n / 2) * power_recursive2(n / 2) * 2)
+    END IF
+
+    IF |n| = 0 THEN
+        RETURN 1
+    IF |n| MOD 2 = 0 THEN
+        RETURN power_recursive2(n / 2) * power_recursive2(n / 2)
+    ELSE
+        RETURN power_recursive2(n / 2) * power_recursive2(n / 2) * 2
+END FUNCTION
+
+Examples 
+power_recursive2(4) (RETURN 16)
+                \
+        RETURN  power_recursive2(2) (RETURN 4)   *    power_recursive2(2) (RETURN 4)
+                   \                                          \
+             power_recursive2(1)*power_recursive2(1)     power_recursive2(1)*power_recursive2(1)
+                     \               \                          \                  \
+                    RETURN 2       RETURN 2                   RETURN 2         RETURN 2

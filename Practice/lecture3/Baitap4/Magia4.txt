@@ -1,0 +1,145 @@
+// enqueue (Thêm phần tử)      : O(1)
+// dequeue (Xóa phần tử)       : O(1)
+// getFront (Lấy phần tử đầu)  : O(1)
+// IsEmpty (Kiểm tra rỗng)     : O(1)
+// printQueue()                : O(n)
+
+
+CLASS Node:
+    DATA: integer
+    NEXT: pointer to Node
+    
+    FUNCTION Node(x):
+        DATA = x
+        NEXT = NULL
+
+CLASS Queue:
+    FRONT: pointer to Node
+    REAR: pointer to Node
+    COUNT: integer
+    -----------------------------------------
+    CONTRUCTOR Queue():
+        FRONT = NULL
+        REAR = NULL
+        COUNT = 0
+    -----------------------------------------
+    FUNCTION enqueue(x):
+        NEW_NODE = new Node(x)
+        IF REAR == NULL THEN:
+            FRONT = NEW_NODE
+            REAR = NEW_NODE
+        ELSE:
+            REAR.NEXT = NEW_NODE
+            REAR = NEW_NODE
+        ENDIF
+        COUNT = COUNT + 1
+    -----------------------------------------
+    FUNCTION dequeue():
+        IF FRONT == NULL THEN:
+            PRINT "Queue is empty!"
+            RETURN
+        ENDIF
+        TEMP = FRONT
+        FRONT = FRONT.NEXT
+        IF FRONT == NULL THEN:
+            REAR = NULL
+        ENDIF
+        DELETE TEMP
+        COUNT = COUNT - 1
+    -----------------------------------------
+    FUNCTION getFront():
+        IF FRONT == NULL THEN:
+            PRINT "Queue is empty!"
+            RETURN -1
+        ENDIF
+        RETURN FRONT.DATA
+
+    FUNCTION size():
+        RETURN COUNT
+    -----------------------------------------
+    FUNCTION printQueue():
+        TEMP = FRONT
+        PRINT "Queue: "
+        WHILE TEMP != NULL DO:
+            PRINT TEMP.DATA, " "
+            TEMP = TEMP.NEXT
+        ENDWHILE
+        PRINT NEW_LINE
+    -----------------------------------------
+FUNCTION main():
+    Q = new Queue()
+    Q.enqueue(2)
+    Q.enqueue(3)
+    Q.enqueue(4)
+    Q.enqueue(5)
+    
+    PRINT "Front:", Q.getFront()
+    PRINT "Size:", Q.size()
+    
+    Q.printQueue()
+    
+    Q.dequeue()
+    PRINT "After dequeue:"
+    Q.printQueue()
+#####################################################################
+
+EXAMPLE
+-----------------------------------------------------------------------
+CREATE Q Queue ( pointer FRONT = NULL, pointer REAR = NULL, COUNT = 0) 
+CALL FUNCTION enqueue(2) 
+    NEW_NODE = [1|NULL]
+    REAR = NULL => {
+        FRONT (Q) = [1|NULL]
+        REAR (Q) = [1|NULL]
+    }
+    COUNT = 1;
+
+Q Queue : [1|NULL]
+          FRONT(Q)
+          REAR(Q)
+-----------------------------------------------------------------------
+CALL FUNCTION enqueue(3)
+    NEW_NODE = [3|NULL]
+    REAR != NULL
+    REAR.NEXT = [3|NULL] or [1|NULL] -> [3|NULL]
+    REAR = [3|NULL]
+    COUNT = 2
+
+Q Queue : [1|NULL] -> [3|NULL]
+          FRONT(Q)
+                      REAR(Q)
+-----------------------------------------------------------------------
+CALL FUNCTION enqueue(4)
+    NEW_NODE = [4|NULL]
+    REAR != NULL
+    REAR.NEXT = [4|NULL] or [1|NULL] -> [3|NULL] -> [4|NULL]
+    REAR = [4|NULL]
+    COUNT = 3
+
+Q Queue : [1|NULL] -> [3|NULL] -> [4|NULL]
+          FRONT(Q)
+                                  REAR(Q)
+-----------------------------------------------------------------------
+CALL FUNCTION enqueue(5)
+    NEW_NODE = [5|NULL]
+    REAR != NULL
+    REAR.NEXT = [5|NULL] or [1|NULL] -> [3|NULL] -> [4|NULL] -> [5|NULL]
+    REAR = [5|NULL]
+    COUNT = 4
+
+Q Queue : [1|NULL] -> [3|NULL] -> [4|NULL] -> [5|NULL]
+          FRONT(Q)
+                                              REAR(Q) 
+-----------------------------------------------------------------------
+CALL FUNCTION getFront() => FRONT(Q)-> DATA => [1|NULL]->DATA = 1
+CALL FUNCTION dequeue() TMP = FRONT 
+           
+          TMP
+Q Queue : [1|NULL] -> [3|NULL] -> [4|NULL] -> [5|NULL]
+                      FRONT(Q)
+                                              REAR(Q) 
+DELETE TMP     
+
+Q Queue : [3|NULL] -> [4|NULL] -> [5|NULL]
+          FRONT(Q)
+                                  REAR(Q) 
