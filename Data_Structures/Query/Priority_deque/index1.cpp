@@ -66,7 +66,7 @@ int main()
     printHeap(minHeap, n);
     cout << endl;
 
-    // insert 8
+    // Insert 8
     cout << "Heap sau khi insert 8" << endl;
     insert(minHeap, 8, n);
     printHeap(minHeap, n);
