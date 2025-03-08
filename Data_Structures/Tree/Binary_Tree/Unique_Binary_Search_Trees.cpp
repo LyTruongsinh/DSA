@@ -35,6 +35,7 @@ private:
 
         for (int i = start; i <= end; ++i)
         {
+            TreeNode *root = new TreeNode(i);
             vector<TreeNode *> leftSubtrees = generateTrees(start, i - 1);
             vector<TreeNode *> rightSubtrees = generateTrees(i + 1, end);
 
@@ -42,7 +43,6 @@ private:
             {
                 for (int k = 0; k < rightSubtrees.size(); ++k)
                 {
-                    TreeNode *root = new TreeNode(i);
                     root->left = leftSubtrees[j];
                     root->right = rightSubtrees[k];
                     trees.push_back(root);
