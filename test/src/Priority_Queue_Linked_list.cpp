@@ -6,21 +6,14 @@ struct Node {
     int data;
     int priority;
     Node* next;
+    Node (int data, int priority) : data(data), priority(priority), next(NULL) {}
 };
 
-// Hàm tạo một node mới
-Node* newNode(int d, int p) {
-    Node* temp = new Node();
-    temp->data = d;
-    temp->priority = p;
-    temp->next = nullptr;
-    return temp;
-}
+
 
 // Hàm đẩy phần tử vào hàng đợi ưu tiên theo thứ tự ưu tiên giảm dần
-void push(Node*& head, int d, int p) {
-    Node* temp = newNode(d, p);
-
+void euqueue(Node*& head, int d, int p) {
+    Node* temp = new Node(d, p);
     // Nếu danh sách rỗng hoặc phần tử mới có ưu tiên cao nhất
     if (!head || p > head->priority) {
         temp->next = head;
@@ -37,7 +30,7 @@ void push(Node*& head, int d, int p) {
 }
 
 // Hàm lấy phần tử có độ ưu tiên cao nhất (ở đầu danh sách)
-void pop(Node*& head) {
+void dequeue(Node*& head) {
     if (!head) {
         cout << "Queue rỗng!\n";
         return;
@@ -74,18 +67,14 @@ void display(Node* head) {
 int main() {
     Node* pq = nullptr;
 
-    push(pq, 4, 3);
-    push(pq, 5, 2);
-    push(pq, 6, 4);
-    push(pq, 7, 1);
-    
-
+    euqueue(pq, 10, 2);
+    euqueue(pq, 5, 3);
+    euqueue(pq, 7, 1);
     cout << "Priority Queue ban đầu:\n";
     display(pq);
-
     cout << "Phần tử có độ ưu tiên cao nhất: " << peek(pq) << endl;
-
-    pop(pq);
+    dequeue(pq);
+    euqueue(pq, 8, 5);
     cout << "Sau khi xóa phần tử có độ ưu tiên cao nhất:\n";
     display(pq);
 
