@@ -5,7 +5,8 @@
     "cmath": "cpp",
     "iostream": "cpp",
     "vector": "cpp",
-    "stack": "cpp"
+    "stack": "cpp",
+    "memory": "cpp"
   },
   "cmake.sourceDirectory": "C:/Users/Admin/OneDrive/Desktop/Data_Structures_and_Algorithms/test"
 }
