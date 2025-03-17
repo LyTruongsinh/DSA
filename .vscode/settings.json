@@ -61,7 +61,8 @@
     "xloctime": "cpp",
     "xmemory": "cpp",
     "xtr1common": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "numeric": "cpp"
   },
   "cmake.sourceDirectory": "C:/Users/Admin/OneDrive/Desktop/Data_Structures_and_Algorithms/test"
 }
