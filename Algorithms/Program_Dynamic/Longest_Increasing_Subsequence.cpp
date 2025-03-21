@@ -10,7 +10,7 @@ public:
         int dp[N];
         int pr[N];
         for(int i = 0; i < N; i++) {
-            dp[i] = 1;
+            dp[i] = 1; // Lưu độ dài của dãy con tăng dài nhất kết thúc ở chỉ số i
             pr[i] = -1;
         }
         int max_length = 1, end_index = 0;

@@ -1,5 +1,6 @@
 #include <iostream>
-#define MAX 10000
+#include <algorithm>
+#define MAX 1000
 using namespace std;
 int A[MAX];
 void quick_sort(int start, int end) {
@@ -18,24 +19,16 @@ void quick_sort(int start, int end) {
     quick_sort(start, right);  // Đệ quy bên trái
     quick_sort(left, end);     // Đệ quy bên phải
 }
+
 int main() {
-    int N, K;
-    cin >> N >> K;
+    int N;
+    cin >> N;
     for (int i = 0; i < N; i++) {
         cin >> A[i];
     }
     quick_sort(0, N - 1);
     for (int i = 0; i < N; i++) {
-        int sum = 0;
-        for(int j = i; j < N; j++) {
-            sum += A[j];
-            if(sum == K) {
-                cout << "YES" << endl;
-                return 0;
-            }
-        }
+        cout << A[i] << " ";
     }
-    cout << "NO" << endl;
     return 0;
-    
 }
