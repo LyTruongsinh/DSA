@@ -30,171 +30,148 @@ public:
     friend bool operator!=(const MyString &, const MyString &);
 };
 
-int myStrCmp(const char *s1, const char *s2)
+MyString ::MyString()
 {
-    while (*s1 && (*s1 == *s2))
-    {
-        s1++;
-        s2++;
-    }
-    return *(unsigned char *)s1 - *(unsigned char *)s2;
-}
-
-// Hàm khởi tạo xâu rỗng
-MyString::MyString() : str(nullptr), len(0) {}
-
-// Hàm khởi tạo từ một xâu kiểu c-string
-MyString::MyString(const char *s)
-{
+    str = new char[1];
     len = 0;
-    while (s[len] != '\0')
-        len++;
-    str = new char[len + 1];
-    for (int i = 0; i < len; i++)
-        str[i] = s[i];
-    str[len] = '\0';
+    str[0] = '\0';
 }
-
-// Hàm khởi tạo sao chép
-MyString::MyString(const MyString &other) : len(other.len)
+MyString ::MyString(const char *s)
 {
-    str = new char[len + 1];
-    for (int i = 0; i < len; i++)
-        str[i] = other.str[i];
-    str[len] = '\0';
+    int i = 0;
+    while (s[i] != '\0')
+    {
+        i++;
+    }
+    len = i;
+    str = new char[i];
+    for (int j = 0; j <= i; j++)
+    {
+        str[j] = s[j];
+    }
 }
-
-// Hàm huỷ
-MyString::~MyString()
+MyString ::MyString(const MyString &s)
+{
+    len = s.len;
+    str = new char[len + 1];
+    for (int i = 0; i <= len; i++)
+    {
+        str[i] = s.str[i];
+    }
+}
+MyString ::~MyString()
 {
     delete[] str;
 }
-
-// Toán tử gán
-MyString MyString::operator=(const MyString &other)
+MyString MyString::operator=(const MyString &s)
 {
-    if (this != &other)
+    len = s.len;
+    str = new char[len + 1];
+    for (int i = 0; i <= len; i++)
     {
-        delete[] str;
-        len = other.len;
-        str = new char[len + 1];
-        for (int i = 0; i < len; i++)
-            str[i] = other.str[i];
-        str[len] = '\0';
+        str[i] = s.str[i];
     }
     return *this;
 }
-
 MyString MyString::operator=(const char *s)
 {
-    delete[] str;
     len = 0;
     while (s[len] != '\0')
         len++;
     str = new char[len + 1];
-    for (int i = 0; i < len; i++)
+    for (int i = 0; i <= len; i++)
+    {
         str[i] = s[i];
-    str[len] = '\0';
+    }
     return *this;
 }
-
-// Toán tử nối xâu rồi gán
-MyString MyString::operator+=(const MyString &other)
+MyString MyString::operator+=(const MyString &s)
 {
-    int newLen = len + other.len;
-    char *newStr = new char[newLen + 1];
+    char *temp = new char[len + s.len + 1];
     for (int i = 0; i < len; i++)
-        newStr[i] = str[i];
-    for (int i = 0; i < other.len; i++)
-        newStr[len + i] = other.str[i];
-    newStr[newLen] = '\0';
-    delete[] str;
-    str = newStr;
-    len = newLen;
+        temp[i] = str[i];
+    for (int i = 0; i <= s.len; i++)
+        temp[len + i] = s.str[i];
+    str = temp;
+    len += s.len;
     return *this;
 }
-
-// Toán tử truy cập kí tự
-char &MyString::operator[](unsigned int index)
+char &MyString ::operator[](unsigned int index)
 {
     return str[index];
 }
-
-const char &MyString::operator[](unsigned int index) const
+const char &MyString ::operator[](unsigned int index) const
 {
     return str[index];
 }
-
-// Hàm trả về độ dài của xâu
-int MyString::size()
+int MyString ::size()
 {
     return len;
 }
-
-// Hàm chuyển thành chữ hoa
-MyString MyString::upper() const
+MyString MyString ::upper() const
 {
-    MyString temp(*this);
-    for (int i = 0; i < temp.len; i++)
-        temp.str[i] = toupper(temp.str[i]);
-    return temp;
+    MyString result(*this);
+    for (int i = 0; i < len; i++)
+    {
+        if (result.str[i] >= 'a' && result.str[i] <= 'z')
+        {
+            result.str[i] -= 32;
+        }
+    }
+    return result;
 }
-
-// Hàm chuyển thành chữ thường
-MyString MyString::lower() const
+MyString MyString ::lower() const
 {
-    MyString temp(*this);
-    for (int i = 0; i < temp.len; i++)
-        temp.str[i] = tolower(temp.str[i]);
-    return temp;
+    MyString result(*this);
+    for (int i = 0; i < len; i++)
+    {
+        if (result.str[i] >= 'A' && result.str[i] <= 'Z')
+        {
+            result.str[i] += 32;
+        }
+    }
+    return result;
 }
-
-// Toán tử xuất
 ostream &operator<<(ostream &os, const MyString &s)
 {
     os << s.str;
     return os;
 }
-
-// Toán tử nối xâu
-MyString operator+(const MyString &s1, const MyString &s2)
+MyString operator+(const MyString &a, const MyString &b)
 {
-    MyString temp = s1;
-    temp += s2;
-    return temp;
+    MyString result(a);
+    result += b;
+    return result;
 }
-
-// Các toán tử so sánh
-bool operator<(const MyString &s1, const MyString &s2)
+bool operator<(const MyString &a, const MyString &b)
 {
-    return myStrCmp(s1.str, s2.str) < 0;
+    int i = 0;
+    while (a.str[i] != '\0' && b.str[i] != '\0')
+    {
+        if (a.str[i] < b.str[i])
+            return true;
+        if (a.str[i] > b.str[i])
+            return false;
+        i++;
+    }
+    return (a.str[i] == '\0' && b.str[i] != '\0');
 }
-
-bool operator>(const MyString &s1, const MyString &s2)
-{
-    return myStrCmp(s1.str, s2.str) > 0;
-}
-
-bool operator<=(const MyString &s1, const MyString &s2)
-{
-    return myStrCmp(s1.str, s2.str) <= 0;
-}
-
-bool operator>=(const MyString &s1, const MyString &s2)
-{
-    return myStrCmp(s1.str, s2.str) >= 0;
-}
-
-bool operator==(const MyString &s1, const MyString &s2)
-{
-    return myStrCmp(s1.str, s2.str) == 0;
-}
-
-bool operator!=(const MyString &s1, const MyString &s2)
-{
-    return myStrCmp(s1.str, s2.str) != 0;
-}
+bool operator>(const MyString &a, const MyString &b) { return b < a; }
+bool operator<=(const MyString &a, const MyString &b) { return !(b < a); }
+bool operator>=(const MyString &a, const MyString &b) { return !(a < b); }
+bool operator==(const MyString &a, const MyString &b) { return !(a < b) && !(b < a); }
+bool operator!=(const MyString &a, const MyString &b) { return !(a == b); }
 int main()
 {
-    cout << (MyString("abc") != MyString("abd"));
+    MyString s1("Hello");
+    MyString s2("World");
+    MyString s3 = s1 + s2;
+    MyString s4 = s1.upper();
+    MyString s5 = s1.lower();
+    cout << "s1 = " << s1 << endl;
+    cout << "s2 = " << s2 << endl;
+    cout << "s3 = " << s3 << endl;
+    cout << "s4 = " << s4 << endl;
+    cout << "s5 = " << s5 << endl;
+    return 0;
 }

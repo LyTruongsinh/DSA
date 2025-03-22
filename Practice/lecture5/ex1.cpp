@@ -69,11 +69,9 @@ public:
                 st.push(cur);  
                 cur = cur->left;
             }
-    
             cur = st.top();
             st.pop();   
             cout << cur->val << " ";
-            
             cur = cur->right; 
         }
     }
