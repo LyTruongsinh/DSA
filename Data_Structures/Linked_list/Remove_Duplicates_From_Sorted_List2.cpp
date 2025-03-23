@@ -69,7 +69,7 @@ int main()
 {
     ListNode *head = new ListNode(1);
     head->next = new ListNode(1);
-
+    head->next->next = new ListNode(2);
     Solution s;
     ListNode *result = s.deleteDuplicates(head);
 
