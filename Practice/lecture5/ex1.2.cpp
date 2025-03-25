@@ -98,7 +98,7 @@ public:
         // Kiểm tra đệ quy với các root con
         return isBinaryTree(root->firstChild) && isBinaryTree(root->nextSibling);
     }
-    void printPreOrder(Treeroot *root)
+    void printPreOrder(Treeroot *root) // Gốc phải trái
     {
         if (root == NULL)
             return;                       // rỗng thì dừng
@@ -106,7 +106,7 @@ public:
         printPreOrder(root->firstChild);  // đệ quy duyệt đến con cả của cây
         printPreOrder(root->nextSibling); // đệ quy duyệt đến các cây con khác
     }
-    void printInOrder(Treeroot *root)
+    void printInOrder(Treeroot *root) // Trái gốc phải
     {
         if (root == NULL)
             return;
@@ -114,7 +114,7 @@ public:
         cout << root->data << " ";
         printInOrder(root->nextSibling);
     }
-    void printPostOrder(Treeroot *root)
+    void printPostOrder(Treeroot *root) // trái phải gốc
     {
         if (root == NULL)
             return;
@@ -149,3 +149,44 @@ int main()
     }
     return 0;
 }
+
+// EXAMLE
+// CALL addChild(1,2)
+// KIEM TRA 1 rootList(1) chưa tồn tại trong danh sách rootList tạo nốt mới với [1|firstChild|nextSibling]
+// KIEM TRA 2 rootList(2) chưa tồn tại trong danh sách rootList tạo nốt mới với [2|firstChild|nextSibling]
+
+// parentroot = [1|firstChild|nextSibling]
+// childroot = [2|firstChild|nextSibling]
+
+// Vì parentroot->firstChild = NULL => [1|firstChild|nextSibling]
+//                                          |
+//                                          [2|firstChild|nextSibling]
+// cập nhật 2 là con ischild(2) = true
+// cập nhật lại root
+
+// CALL addChild(1,3)
+// KIEM TRA 1 rootList(1) ở đây rootList(1) đã tồn tại trong mảng rootList
+// rootList(3) chưa tồn tại tạo nốt mới [3|firstChild|nextSibling]
+
+// parentroot = [1|firstChild|nextSibling]
+// vì parentroot->firstChild đã tồn tại ở đây là [2|firstChild|nextSibling]
+// duyệt danh sách parent->firstChild đến cuối rồi insert [3|firstChild|nextSibling] vào danh dách parent->firstChild 
+
+// [1|firstChild|nextSibling]
+//         |
+//         [2|firstChild|nextSibling] -> [3|firstChild|nextSibling]
+
+// CALL addChild(5,1)
+// KIEM TRA rootList(5) chưa tồn tại tạo mới [5|firstChild|nextSibling]
+// rootList(1) đã tồn tại 
+
+// parentroot = [5|firstChild|nextSibling]
+// childroot = [1|firstChild|nextSibling]
+
+// Vì parentroot->firstChild = NULL => [5|firstChild|nextSibling]
+//                                          |
+//                                          [1|firstChild|nextSibling]
+//                                                 |
+//                                                 [2|firstChild|nextSibling] -> [3|firstChild|nextSibling]
+// set lại rootList(1) là con (isChild(1) = true)
+// cập nhật lại danh sách root = rootList(5)
