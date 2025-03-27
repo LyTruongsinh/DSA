@@ -3,7 +3,7 @@
 using namespace std;
 int n, m;
 vector<int> adj[1001];
-// adj[i] lưu danh sách kề của đỉnh i
+// adj[i] lưu danh sách kề của đỉnh i vô hướng
 int main() {
     cin >> n >> m;
     for(int i = 0; i < m; i++) {

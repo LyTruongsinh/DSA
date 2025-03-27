@@ -14,7 +14,6 @@ public:
         }
         if (idx == candidates.size())
             return;
-
         if (candidates[idx] <= target)
         { // picking the element
             v.push_back(candidates[idx]);
