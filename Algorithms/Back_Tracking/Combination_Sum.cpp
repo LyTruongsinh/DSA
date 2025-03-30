@@ -5,38 +5,32 @@ class Solution
 {
 public:
     vector<vector<int>> ans;
-    void helper(vector<int> &candidates, int target, int idx, vector<int> &v)
+    void helper(vector<int> &candidates, int remain, int start, vector<int> &cur)
     {
-        if (target == 0)
-        {
-            ans.push_back(v);
+        if(remain == 0) {
+            ans.push_back(cur);
             return;
         }
-        if (idx == candidates.size())
+        if(remain < 0) {
             return;
-        if (candidates[idx] <= target)
-        { // picking the element
-            v.push_back(candidates[idx]);
-            helper(candidates, target - candidates[idx], idx, v);
-            v.pop_back();
         }
-
-        int j = idx + 1;
-        while (j < candidates.size() && candidates[j] == candidates[j - 1])
-            j++;
-        helper(candidates, target, j, v); // not picking the element
+        for(int i = start; i < candidates.size(); i++) {
+            cur.push_back(candidates[i]);
+            helper(candidates, remain - candidates[i], i, cur);
+            cur.pop_back();
+        }
     }
     vector<vector<int>> combinationSum(vector<int> &candidates, int target)
     {
-        vector<int> v;
-        helper(candidates, target, 0, v);
+        vector<int> cur;
+        helper(candidates, target, 0, cur);
         return ans;
     }
 };
 int main() {
     Solution s;
-    vector<int> candidates = {10, 1, 2, 7, 6, 1, 5};
-    int target = 8;
+    vector<int> candidates = {1,2,5};
+    int target = 5;
     vector<vector<int>> result = s.combinationSum(candidates, target);
     for (auto &v : result)
     {
