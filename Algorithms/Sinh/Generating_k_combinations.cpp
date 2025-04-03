@@ -11,8 +11,8 @@ void Init()
 }
 void Gen_K_Combination()
 {
-    int i = k;
-    // Khi i chưa đạt giá trị max n-k+i
+    int i = k; // bắt đầu từ phần tử cuối cùng
+    // đi tìm i chưa đạt giá trị max n-k+i
     while (i >= 1 && a[i] == n - k + i)
     {
         --i;
@@ -42,3 +42,5 @@ int main()
     }
     return 0;
 }
+
+// Explain
