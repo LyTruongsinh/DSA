@@ -2,68 +2,83 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <algorithm> // Để dùng std::swap
+#include <algorithm>
 
 using namespace std;
 
-class Solution {
+// Lớp Solution dùng để xử lý bài toán đọc số, sắp xếp, và ghi ra file
+class Solution
+{
 private:
-    vector<int> numbers;
+    vector<int> numbers; // Danh sách các số nguyên
 
 public:
-    void input(const string& pathin);
-    void sortNumbers();
-    void output(const string& pathout);
+    void input(const string &pathin);   // Đọc dữ liệu từ file input
+    void sortNumbers();                 // Sắp xếp dãy số
+    void output(const string &pathout); // Ghi dữ liệu ra file output
 };
 
-// Đọc dữ liệu từ file
-void Solution::input(const string& pathin) {
-    ifstream inputfile(pathin);
-    if (!inputfile) {
+// Hàm đọc dữ liệu từ file input
+void Solution::input(const string &pathin)
+{
+    ifstream inputfile(pathin); // Mở file để đọc
+    if (!inputfile)
+    { // Nếu không mở được file
         cerr << "Error: Cannot open file " << pathin << endl;
         return;
     }
-    
+
     int num;
-    while (inputfile >> num) {
-        numbers.push_back(num);
+    while (inputfile >> num)
+    {                           // Đọc từng số nguyên
+        numbers.push_back(num); // Thêm vào vector
     }
-    
-    inputfile.close();
+
+    inputfile.close(); // Đóng file sau khi đọc
 }
 
-// Sắp xếp Bubble Sort (có thể thay bằng sort của STL)
-void Solution::sortNumbers() {
-    for (size_t i = 0; i < numbers.size() - 1; i++) {
-        for (size_t j = i + 1; j < numbers.size(); j++) {
-            if (numbers[i] > numbers[j]) {
-                swap(numbers[i], numbers[j]); // Dùng std::swap()
+// Hàm sắp xếp dãy số bằng thuật toán Bubble Sort
+void Solution::sortNumbers()
+{
+    for (size_t i = 0; i < numbers.size() - 1; i++)
+    {
+        for (size_t j = i + 1; j < numbers.size(); j++)
+        {
+            if (numbers[i] > numbers[j])
+            {
+                swap(numbers[i], numbers[j]); // Hoán đổi nếu không đúng thứ tự
             }
         }
     }
 }
 
-// Ghi kết quả ra file
-void Solution::output(const string& pathout) {
-    ofstream outputfile(pathout);
-    if (!outputfile) {
+// Hàm ghi dữ liệu đã sắp xếp ra file output
+void Solution::output(const string &pathout)
+{
+    ofstream outputfile(pathout); // Mở file để ghi
+    if (!outputfile)
+    { // Nếu không mở được file
         cerr << "Error: Cannot write to file " << pathout << endl;
         return;
     }
-    
-    for (size_t i = 0; i < numbers.size(); i++) {
-        if (i > 0) outputfile << " ";
-        outputfile << numbers[i];
+
+    for (size_t i = 0; i < numbers.size(); i++)
+    {
+        if (i > 0)
+            outputfile << " ";    // Thêm dấu cách giữa các số
+        outputfile << numbers[i]; // Ghi từng số ra file
     }
-    
-    outputfile.close();
+
+    outputfile.close(); // Đóng file sau khi ghi
 }
 
-int main() {
+// Hàm main - nơi chương trình bắt đầu
+int main()
+{
     Solution s;
-    s.input("input.txt");
-    s.sortNumbers();
-    s.output("numbers.sorted");
+    s.input("input.txt");       // Đọc dữ liệu từ file input.txt
+    s.sortNumbers();            // Sắp xếp dãy số
+    s.output("numbers.sorted"); // Ghi kết quả ra file numbers.sorted
 
     cout << "Sorting completed! Check 'numbers.sorted'.\n";
     return 0;
