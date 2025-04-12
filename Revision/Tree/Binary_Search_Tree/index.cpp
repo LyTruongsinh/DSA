@@ -19,6 +19,8 @@ public:
     void fineOne(TreeNode *root, int val);
     TreeNode *insert(TreeNode *root, int val);
     TreeNode *erase(TreeNode *root, int val);
+    TreeNode *eraseMin(TreeNode *root, int val);
+    TreeNode *eraseMax(TreeNode *root, int val);
     bool checkBinarySearchTree(TreeNode *root);
     void findLCA(TreeNode *root);
     bool balanceBST(TreeNode *root);
@@ -135,7 +137,7 @@ TreeNode *Solution::erase(TreeNode *root, int val)
             }
         }
         else
-        {
+        {   // tìm kiếm node cần xóa
             if (val < root->val)
             {
                 root->left = erase(root->left, val);
@@ -172,6 +174,31 @@ bool Solution::balanceBST(TreeNode *root)
         return false;
     return true;
 }
+
+TreeNode* eraseMin(TreeNode* root) {
+    if (root == NULL) return NULL;
+
+    if (root->left == NULL) {
+        TreeNode* temp = root->right;
+        delete root;          // Giải phóng node nhỏ nhất
+        return temp;          // Trả về cây mới sau khi xóa node
+    }
+
+    root->left = eraseMin(root->left); // Tiếp tục đệ quy xuống trái
+    return root;                       // Cập nhật lại cây
+}
+TreeNode* eraseMax(TreeNode* root) {
+    if (root == NULL) return NULL;
+
+    if (root->right == NULL) {
+        TreeNode* temp = root->left;
+        delete root;          // Giải phóng node lớn nhất
+        return temp;          // Trả về cây mới sau khi xóa node
+    }
+
+    root->right = eraseMax(root->right); // Tiếp tục đệ quy xuống phải
+    return root; // Cập nhật lại cây
+}                        
 int main()
 {
     Solution s;

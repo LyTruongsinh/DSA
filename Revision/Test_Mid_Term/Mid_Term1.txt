@@ -1,0 +1,269 @@
+Câu 1: Vì sao để đánh giá thuật toán nên dùng phân tích toán học hơn phân tích thực nghiệm? Hãy
+đưa ra 2 đoạn chương trình ví dụ có thời gian O(1).
+1. Tổng quát hóa cho mọi đầu vào
+Phân tích toán học cho phép đánh giá hiệu suất của thuật toán trên mọi đầu vào, không phụ thuộc vào máy tính, trình biên dịch, hay cấu hình phần cứng.
+Trong khi đó, phân tích thực nghiệm chỉ phản ánh hiệu suất trên một số lượng hữu hạn các đầu vào cụ thể.
+2. Độc lập với môi trường thực thi
+Phân tích toán học không phụ thuộc vào ngôn ngữ lập trình, CPU, RAM,...
+Thực nghiệm có thể bị sai lệch do cache, tốc độ bộ nhớ, hệ điều hành,...
+3. Đo lường độ phức tạp trong điều kiện lý tưởng
+Phân tích toán học giúp biết trước thuật toán có tăng nhanh hay chậm khi dữ liệu lớn lên, còn thực nghiệm thì không thể chạy hết mọi trường hợp.
+
+ví dụ 
+#include <iostream>
+using namespace std;
+
+int tong(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int a = 5, b = 10;
+    cout << "Tong la: " << tong(a, b) << endl;
+    return 0;
+}
+
+Câu 2: Giải thích mối quan hệ giữa f(n) và g(n) trong biểu thức f(n) = O(g(n)). Hãy đưa ra 2 đoạn
+chương trình ví dụ có thời gian O(n).
+
+Biểu thức f(n) = O(g(n)) có nghĩa là tốc độ tăng trưởng của hàm f(n) (thời gian chạy thực tế của thuật toán) không vượt quá một hằng số nhân với g(n) khi n đủ lớn.
+
+👉 Cụ thể:
+
+Có tồn tại hằng số dương c và n₀ sao cho:
+
+      f(n) ≤ c × g(n) với mọi n ≥ n₀.
+
+📌 Ý nghĩa:
+g(n) là hàm bậc trên để ước lượng độ phức tạp.
+
+Ta dùng O(g(n)) để biểu diễn độ phức tạp thời gian tệ nhất (worst-case).
+
+f(n) có thể nhỏ hơn hoặc bằng g(n) (nhân với 1 hằng số) khi n đủ lớn.
+
+Câu 3: 
+bool binarySearch(int arr[], int n, int x) {
+    int left = 0, right = n - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2; 
+        if (arr[mid] == x)
+            return true;
+        else if (arr[mid] < x)
+            left = mid + 1;
+        else
+            right = mid - 1;
+    }
+    return false;
+}
+| 0 | 1 | 2 | 03 | 04 | 05 | 06 | 07 | 008 |
+| 2 | 5 | 7 | 11 | 12 | 20 | 22 | 30 | 104 |
+find x = 3
+mid = 4  => arr[4] > 3 => left = 0 right = 3
+mid = 1  => arr[1] > 3 => left = 0 right = 0
+mid = 0  => arr[0] < 3 => left = 1 right = 0 break
+
+Câu 4: 4. Khi áp dụng thuật toán tuyến tính trộn 2 mảng a, b tăng thành một mảng c tăng (hình dưới), ta
+cần bao nhiêu phép so sánh phần tử của a với phần tử của b?
+a = [2, 22, 30]        (3 phần tử)  
+b = [5, 7, 11, 12, 20, 104]  (6 phần tử)  
+c = [2, 5, 7, 11, 12, 20, 22, 30, 104]
+1. a[0] < b[0] chèn 2 i++
+2. a[1] = 22 b[0] = 5 => a[1] > b[0] chèn 5 j++
+3. a[1] = 22 b[1] = 7 => a[1] > b[1] chèn 7 j++
+4. a[1] = 22 b[2] = 11 => a[1] > b[2] chèn 11 j++
+5. a[1] = 22 b[3] = 12 => a[1] > b[3] chèn 12 j++
+6. a[1] = 22 b[4] = 20 => a[1] > b[4] chèn 20 j++
+7. a[1] = 22 b[5] = 104 => a[1] < b[5] chèn 22 i++
+8. a[2] = 30 b[5] = 104 => a[2] < b[5] chèn 30 i++
+=> a hết phần tử -> chèn phần còn lại của b
+
+Câu 5: 
+Phân tích độ phức tạp thời gian của đoạn mã sau:
+int mystery1(int n){
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < i; j++) {
+            sum += i * j;
+        }
+    }
+}
+O(n^2)
+Câu 6: O(n^3)
+Câu 7: 
+int mystery2(int a[], unsigned int n)
+{
+    int sum = 0;
+    int thisSum = 0;
+    for (int i = 0; i < n; i++) {
+        thisSum += a[i];
+        if (thisSum > sum)
+            sum = thisSum;
+        if (thisSum < 0)
+            thisSum = 0;
+    }
+    return sum;
+}
+O(n)
+Câu 8:
+n*(n-1)/2
+Câu 9:
+a) ngăn xếp bằng mảng tĩnh
+biến top để lưu đỉnh ngăn xếp
+khởi tạo top = 0
+push a[top] = val
+top++
+erase top--
+top a[top - 1]
+b) danh sách liên kết đơn
+khởi tạo top để lưu đỉnh ngăn xếp
+khởi tạo count để lấy size của ngăn xếp
+push tạo một node mới nối top vào node mới cập nhật top là node mới đó tắng count++
+pop top=top->next;
+gettop chính là top
+c) danh sách liên kết đôi
+khỏi tạo top lưu đỉnh ngăn xếp
+push : tạo node nới, if top != null top->next = newnode, newnode->prev = top, cập nhật top = newnode
+pop : top = top->prev, top->next = null
+peek : top
+Câu 10:
+cái b ko hợp lý
+Câu 11:
+b ,c , d đếu ko hợp lệ
+Câu 12:
+Cài đặt hàng đợi 
+a) bằng mảng tĩnh
+font theo dõi đầu hàng đọi = 0
+rear theo dõi cuối hàng đợi = 0
+enqueue: thêm vào thì a[rear] = val, cập nhật size++,cập nhật rear vào các chỗ còn trống rear;
+dequeue: a[font], cập nhật font;
+b) cài đặt bằng danh sách liên kết đơn
+khỏi tạo font theo dõi đầu hàng đợi = NULL
+Khỏi tạo reat theo dõi cuối hàng đợi = NULL
+enqueue : tạo node mới, nếu rear = null thì font = rear = node mới, nếu không thêm node mới vào hàng đợi rear->next = newNode, cập nhật rear = newNode, cập nhật size
+dequeue : font = font->next, cập nhật xong mà rỗng thì cập nhật rear cũng bằng rỗng, size--
+Câu 13:
+            x
+          /   \
+        2       +
+              /   \
+            4       +
+                  /   \
+                5       3
+duyệt postorder để in ra postfix
+2 4 5 3 + + x
+Đọc 2
+đẩy vào stack[2]
+Đọc 4 
+đẩy vào stack[2 ,4]
+Đọc 5 
+đẩy vào stack[2, 4, 5]
+Đọc 3
+đẩy vào stack[2, 4, 5, 3]
+Đọc '+'
+pop(3, 5)
+đẩy vào stack(5 + 3) stack[2, 4, 8]
+Đọc '+'
+pop(4 , 8)
+đẩy vào stack(4 + 8) stack[2, 12]
+Đọc '*'
+pop(2, 12)
+đẩy vào stack(2 * 12) stack[24]
+print stack.top
+Câu 15:
+             8
+           /   \
+         3       10
+       /   \       \
+     1      6        14
+           /  \     /
+          4    7   13
+                  /
+                11
+a) insert 11
+if(root == null) {
+    root = new TreeNode(val);
+    return root
+}
+else {
+    if(11 > 8) {
+        root->right = IS(10,11)
+                        |
+                      if(11 > 10) {
+                        root->right = IS(14,11)
+                                          |
+                                      if(14 > 11) {
+                                        root->left = IS(13,11)
+                                                        |
+                                                     if(13 > 11) {
+                                                        root->left = IS(null, 11) = 11
+                                                     }
+                                      }
+                      }
+                    
+    }
+}
+Câu 16:
+               16
+             /    \
+            6     20
+          /   \
+         2    11
+                \
+                12
+
+
+
+               12
+             /    \
+            6     20
+          /   \
+         2    11
+Câu 17:
+insert(root,val) {
+    IF(root = NULL) tạo node mới TreeNode(val); return root
+    ELSE {
+        IF(val < root-> val) root->left = insert(root->left,val)
+        ELSE root->right = insert(root->right, val)
+    }
+}
+deleteMin(root) {
+    IF(root = NULL) return NULL
+    IF(root->left = NULL) {
+        minval = root->val;
+        TreeNode* rightChild = root->right;
+        delete root;
+        return rightChild;
+    }
+    root->left = deleteMin(root->left)
+}
+Câu 19:
+class ArrayStack {
+public:
+    ArrayStack(): element(NULL), capacity(0), t(-1){}
+    // Các phương thức khác của ngăn xếp
+    void push(int x);
+private:
+    int * element; // con trỏ tới mảng cấp phát động
+    int capacity; // dung lượng mảng động
+    int t; // chỉ số mảng của phần tử đỉnh ngăn xếp
+};
+void ArrayStack::push(int x) {
+    // Nếu mảng đầy, cấp phát mảng mới có kích thước lớn hơn (gấp đôi)
+    if(t + 1 = capacity) {
+        int newCapacity = (capacity == 0) ? 1 : capacity*2
+        int* newElement = new int[newCapacity]
+        // Sao chép dữ liệu cũ sang mảng mới
+        for (int i = 0; i <= t; ++i) {
+            newElement[i] = element[i];
+        }
+
+        // Giải phóng mảng cũ
+        delete[] element;
+
+        // Cập nhật con trỏ và dung lượng
+        element = newElement;
+        capacity = newCapacity;
+    }
+     // Thêm phần tử mới vào đỉnh ngăn xếp
+    element[++t] = x;
+}

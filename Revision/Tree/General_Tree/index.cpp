@@ -35,7 +35,7 @@ void Tree::updateRoot()
 {
     for (int i = 0; i < 1000; i++)
     {
-        if (rootlists[i] != nullptr && !isChild[i])
+        if (rootlists[i] != nullptr && isChild[i] == false)
         {
             root = rootlists[i];
             break;
@@ -44,48 +44,50 @@ void Tree::updateRoot()
 }
 void Tree::addChild(int parent, int child)
 {
-    if (!rootlists[parent])
-    {
-        rootlists[parent] = new Treeroot(parent); // nếu chưa thì tạo Treeroot [parent|firstChild|nextSibling] và lưu vào rootLists
-    }
-    if (!rootlists[child])
-    {
-        rootlists[child] = new Treeroot(child); // nếu chưa thì tạo Treeroot [child|firstChild|nextSibling] và lưu vào rootLists
-    }
-    Treeroot *parentroot = rootlists[parent];
-    Treeroot *childroot = rootlists[child];
-    if (parentroot->firstChild == nullptr)
+    if (rootlists[parent] == NULL) rootlists[parent] = new Treeroot(parent); // nếu chưa thì tạo Treeroot [parent|firstChild|nextSibling] và lưu vào rootLists
+    
+    if (rootlists[child] == NULL) rootlists[child] = new Treeroot(child); // nếu chưa thì tạo Treeroot [child|firstChild|nextSibling] và lưu vào rootLists
+    
+    Treeroot *parentroot = rootlists[parent]; // nếu tồn tại thì lấy ra
+    Treeroot *childroot = rootlists[child]; // nếu tồn tại thì lấy ra
+    if (parentroot->firstChild == nullptr) // Nếu chưa có con cả
     {
         parentroot->firstChild = childroot;
     }
-    else
+    else // nếu có con cả
     {
         Treeroot *temp = parentroot->firstChild;
+        // Duyệt qua các anh em (nextSibling) của con đầu tiên cho đến khi gặp nút cuối cùng
         while (temp->nextSibling != nullptr)
         {
             temp = temp->nextSibling;
         }
-        temp->nextSibling = childroot;
+        temp->nextSibling = childroot; // Gán con mới vào cuối danh sách anh em
     }
-    isChild[child] = true;
+    isChild[child] = true; // Đánh dấu nút con đã được thêm vào
     updateRoot();
 }
+// Hàm tính chiều cao của cây (hoặc chiều cao của một nút trong cây)
+// Trả về chiều cao của cây có gốc là `root`
 int Tree::Height(Treeroot *root)
 {
     if (root == nullptr)
-        return -1;
-    Treeroot *temp = root->firstChild;
-    int max_height_of_root = Height(temp);
+        return -1; // Nếu cây rỗng thì chiều cao là -1 (không có nút nào)
+
+    Treeroot *temp = root->firstChild; // Lấy con đầu tiên của nút gốc
+    int max_height_of_root = Height(temp); // Tính chiều cao của nhánh đầu tiên
+    // Nếu có con đầu tiên thì duyệt qua các anh em (nextSibling) của nó
     if (temp != nullptr)
     {
         Treeroot *tempnext = temp->nextSibling;
         while (tempnext != nullptr)
         {
+            // Cập nhật chiều cao lớn nhất trong các nhánh con
             max_height_of_root = max(max_height_of_root, Height(tempnext));
-            tempnext = tempnext->nextSibling;
+            tempnext = tempnext->nextSibling; // Chuyển sang anh em tiếp theo
         }
     }
-    return max_height_of_root + 1;
+    return max_height_of_root + 1; // Cộng thêm 1 để tính chiều cao tính từ gốc
 }
 Treeroot *Tree::getRoot()
 {
@@ -105,7 +107,7 @@ bool Tree::isBinaryTree(Treeroot *root)
         if (childCount > 2)
             return false;
         // Đệ quy kiểm tra cây con
-        if (!isBinaryTree(child))
+        if (isBinaryTree(child) == false)
             return false;
         child = child->nextSibling;
     }

@@ -5,13 +5,19 @@ void insertionSort(int arr[], int n) {
     for (int i = 1; i < n; i++) {
         int key = arr[i];
         int j;
-        // Duyệt từ i-1 về 0 bằng for, giống while
-        for (j = i - 1; j >= 0 && arr[j] > key; j--) {
-            arr[j + 1] = arr[j];  // đẩy phần tử lớn hơn sang phải
+        // Tìm vị trí chèn thích hợp cho key
+        for (j = i - 1; j >= 0; j--) {
+            if (arr[j] > key) {
+                arr[j + 1] = arr[j];  // đẩy phần tử sang phải
+            } else {
+                break;  // không còn phần tử nào lớn hơn key
+            }
         }
-        arr[j + 1] = key;  // chèn key vào vị trí đúng
+        // Chèn key vào đúng vị trí
+        arr[j + 1] = key;
     }
 }
+
 
 // Hàm in mảng
 void printArray(int arr[], int n) {

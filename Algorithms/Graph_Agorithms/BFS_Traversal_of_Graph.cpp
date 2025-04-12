@@ -2,7 +2,6 @@
 #include <vector>
 #include <queue>
 using namespace std;
-
 // BFS from given source s (in đề là từ 0)
 vector<int> bfs(vector<vector<int>>& adj) {
     int V = adj.size();                  // Số đỉnh
