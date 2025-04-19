@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/Admin/OneDrive/Desktop/Data_Structures_and_Algorithms/build",
+  "command": "D:\\msys64\\ucrt64\\bin\\g++.exe   -g -o CMakeFiles\\test.dir\\src\\test.cpp.obj -c C:\\Users\\Admin\\OneDrive\\Desktop\\Data_Structures_and_Algorithms\\Test\\src\\test.cpp",
+  "file": "C:/Users/Admin/OneDrive/Desktop/Data_Structures_and_Algorithms/Test/src/test.cpp",
+  "output": "CMakeFiles/test.dir/src/test.cpp.obj"
+}
+]
