@@ -10,7 +10,7 @@ void reverse(char *s)
     while (*en != '\0')
     {
         en++;
-    }
+    } 
     en--; // Quay lại ký tự cuối cùng (không phải '\0')
     // Đổi chỗ các ký tự từ đầu đến cuối
     while (st < en)

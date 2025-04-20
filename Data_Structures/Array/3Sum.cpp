@@ -1,29 +1,50 @@
+#include <algorithm>
 #include <iostream>
-#include <vector>
 #include <set>
+#include <vector>
 using namespace std;
+
 class Solution {
-    public:
-        vector<vector<int>> threeSum(vector<int>& nums) {
-            int n = nums.size();
-            set<vector<int>> result;
-    
-            for (int i = 0; i < n; i++) {
-                for (int j = i + 1; j < n; j++) {
-                    for (int k = j + 1; k < n; k++) {
-                        if (nums[i] + nums[j] + nums[k] == 0) {
-                            vector<int> triplet = {nums[i], nums[j], nums[k]};
-                            sort(triplet.begin(), triplet.end());
-                            result.insert(triplet);  // tránh trùng bằng set
-                        }
-                    }
+private:
+    vector<int> nums;
+    set<vector<int>> result;
+
+public:
+    bool BinarySearch(int left, int right, int target) {
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return true;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return false;
+    }
+
+    vector<vector<int>> threeSum(vector<int>& inputNums) {
+        nums = inputNums;
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int index = nums[i] + nums[j];
+                int target = -index;
+                if (BinarySearch(j + 1, n - 1, target)) {
+                    vector<int> triplet = {nums[i], nums[j], target};
+                    sort(triplet.begin(), triplet.end());
+                    result.insert(triplet);
                 }
             }
-    
-            return vector<vector<int>>(result.begin(), result.end());
+        }
+
+        return vector<vector<int>>(result.begin(), result.end());
     }
 };
-    
+
 int main() {
     Solution s;
     vector<int> nums = {-1, 0, 1, 2, -1, -4};
