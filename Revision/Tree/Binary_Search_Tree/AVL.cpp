@@ -1,5 +1,6 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
+
 using namespace std;
 
 struct AVLNode {
@@ -14,7 +15,6 @@ struct AVLNode {
         height = 1;
     }
 };
-
 // ======= Hàm phụ =======
 int height(AVLNode* node) {
     if (node != nullptr)
@@ -29,7 +29,6 @@ int getBalance(AVLNode* node) {
     else
         return 0;
 }
-
 AVLNode* rightRotate(AVLNode* y) {
     AVLNode* x = y->left;
     AVLNode* T2 = x->right;
@@ -37,14 +36,12 @@ AVLNode* rightRotate(AVLNode* y) {
     // Quay
     x->right = y;
     y->left = T2;
-
     // Cập nhật chiều cao
     y->height = max(height(y->left), height(y->right)) + 1;
     x->height = max(height(x->left), height(x->right)) + 1;
 
     return x;
 }
-
 AVLNode* leftRotate(AVLNode* x) {
     AVLNode* y = x->right;
     AVLNode* T2 = y->left;
@@ -62,15 +59,13 @@ AVLNode* leftRotate(AVLNode* x) {
 
 AVLNode* minValueNode(AVLNode* node) {
     AVLNode* current = node;
-    while (current->left != nullptr)
-        current = current->left;
+    while (current->left != nullptr) current = current->left;
     return current;
 }
 
 // ======= Thêm node =======
 AVLNode* insert(AVLNode* root, int key) {
-    if (root == nullptr)
-        return new AVLNode(key);
+    if (root == nullptr) return new AVLNode(key);
 
     if (key < root->key)
         root->left = insert(root->left, key);
@@ -84,11 +79,9 @@ AVLNode* insert(AVLNode* root, int key) {
     int balance = getBalance(root);
 
     // Mất cân bằng và xử lý xoay
-    if (balance > 1 && key < root->left->key)
-        return rightRotate(root);
+    if (balance > 1 && key < root->left->key) return rightRotate(root);
 
-    if (balance < -1 && key > root->right->key)
-        return leftRotate(root);
+    if (balance < -1 && key > root->right->key) return leftRotate(root);
 
     if (balance > 1 && key > root->left->key) {
         root->left = leftRotate(root->left);
@@ -105,8 +98,7 @@ AVLNode* insert(AVLNode* root, int key) {
 
 // ======= Xoá node =======
 AVLNode* deleteNode(AVLNode* root, int key) {
-    if (root == nullptr)
-        return root;
+    if (root == nullptr) return root;
 
     if (key < root->key)
         root->left = deleteNode(root->left, key);
@@ -118,8 +110,7 @@ AVLNode* deleteNode(AVLNode* root, int key) {
             AVLNode* temp = root->right;
             delete root;
             return temp;
-        }
-        else if (root->right == nullptr) {
+        } else if (root->right == nullptr) {
             AVLNode* temp = root->left;
             delete root;
             return temp;
@@ -131,24 +122,21 @@ AVLNode* deleteNode(AVLNode* root, int key) {
         root->right = deleteNode(root->right, temp->key);
     }
 
-    if (root == nullptr)
-        return root;
+    if (root == nullptr) return root;
 
     // Cập nhật chiều cao và cân bằng
     root->height = 1 + max(height(root->left), height(root->right));
     int balance = getBalance(root);
 
     // Kiểm tra cân bằng và xoay
-    if (balance > 1 && getBalance(root->left) >= 0)
-        return rightRotate(root);
+    if (balance > 1 && getBalance(root->left) >= 0) return rightRotate(root);
 
     if (balance > 1 && getBalance(root->left) < 0) {
         root->left = leftRotate(root->left);
         return rightRotate(root);
     }
 
-    if (balance < -1 && getBalance(root->right) <= 0)
-        return leftRotate(root);
+    if (balance < -1 && getBalance(root->right) <= 0) return leftRotate(root);
 
     if (balance < -1 && getBalance(root->right) > 0) {
         root->right = rightRotate(root->right);

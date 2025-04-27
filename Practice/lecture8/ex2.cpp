@@ -39,3 +39,11 @@ int main() {
     return 0;
     
 }
+
+// // Example input:
+// 5 10
+// 2 3 1 4 6
+// Sắp xếp quick như bài 1
+// K = 10
+// 2 + 3 + 1 + 4 = 10
+// => YES

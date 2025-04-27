@@ -28,10 +28,14 @@ private:
 public:
     void input()
     {
-        cout << "Nhap so dinh :";
+        cout << "Nhap so dinh : ";
         cin >> n;
-        cout << "Nhap so canh :";
+        cout << "Nhap so canh : ";
         cin >> m;
+        cout << "Nhap dau duong di : ";
+        cin >> s;
+        cout << "Nhap cuoi duong di : ";
+        cin >> t;
         for (int i = 0; i < m; i++)
         {
             int x, y;
@@ -39,10 +43,6 @@ public:
             adj[x].push_back(y);
             adj[y].push_back(x);
         }
-        cout << "Nhap dau duong di :";
-        cin >> s;
-        cout << "Nhap cuoi duong di :";
-        cin >> t;
     }
     void dfs(int u)
     {
@@ -77,7 +77,8 @@ public:
     {
         memset(visited, false, sizeof(visited));
         memset(parent, 0, sizeof(parent));
-        dfs(s);
+        // dfs(s);
+        bfs(s);
         if (!visited[t])
         {
             cout << "Khong co duong di" << endl;
@@ -85,7 +86,6 @@ public:
         else
         {
             vector<int> Path; // Truy vet duong di
-
             // Bat dau tu dinh t
             while (t != s)
             {
@@ -94,6 +94,9 @@ public:
             }
             Path.push_back(s);
             reverse(Path.begin(), Path.end());
+            int len = Path.size() - 1;
+            cout << "Độ dài đường đi là: " << len << endl;
+            cout << "Duong di la: ";
             for (int x : Path)
             {
                 cout << x << " ";
