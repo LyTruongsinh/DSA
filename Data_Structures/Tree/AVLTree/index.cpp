@@ -1,8 +1,6 @@
 #include <algorithm>
 #include <iostream>
-
 using namespace std;
-
 struct AVLNode {
     int key;
     AVLNode* left;
@@ -24,10 +22,13 @@ int height(AVLNode* node) {
 }
 
 int getBalance(AVLNode* node) {
-    if (node != nullptr)
-        return height(node->left) - height(node->right);
-    else
-        return 0;
+    if (node != nullptr) {
+        int leftHeight = height(node->left);
+        int rightHeight = height(node->right);
+        int balanceFactor = leftHeight - rightHeight;
+        return balanceFactor;
+    }
+    return 0;
 }
 AVLNode* rightRotate(AVLNode* y) {
     AVLNode* x = y->left;
