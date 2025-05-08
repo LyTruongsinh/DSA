@@ -1,6 +1,5 @@
 // đường đi có đỉnh đầu trùng với đỉnh cuối gọi là xác định chu trình
 #include <limits.h>
-
 #include <algorithm>
 #include <cmath>
 #include <cstring>
@@ -12,7 +11,10 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-
+// trạng thái node trong đồ thị
+// màu trắng : chưa được duyệt (1)
+// màu xám : đang duyệt (2)
+// màu đen : đã duyệt (3)
 
 using namespace std;
 int soluongdinh;
@@ -21,6 +23,7 @@ int st, en;             // đỉnh đầu và đỉnh cuối của đường đi
 vector<int> adj[1001];  // danh sách kề
 bool visited[1001];     // mảng đánh dấu đã duyệt
 int parent[1001];       // mảng cha của các đỉnh trong DFS
+int color[1001];       // mảng màu của các đỉnh
 void InputGraph() {
     cout << "Nhap so dinh: ";
     cin >> soluongdinh;
@@ -30,48 +33,27 @@ void InputGraph() {
         int u, v;
         cin >> u >> v;
         adj[u].push_back(v);
-        adj[v].push_back(u);  // Đồ thị vô hướng
     }
     memset(visited, false, sizeof(visited));  // Khởi tạo mảng visited
 }
 bool DFS(int u) {
-    visited[u] = true;        // Đánh dấu đỉnh u đã được duyệt
-    for (int v : adj[u]) {    // Duyệt qua các đỉnh kề với u
-        if (!visited[v]) {    // Nếu đỉnh v chưa được duyệt
+    color[u] = 1;  // Đánh dấu đỉnh u đang duyệt (màu xám)
+    for(int v : adj[u]) {    // Duyệt qua các đỉnh kề với u
+        if (color[v] == 0) {  // Nếu đỉnh v chưa được duyệt (màu trắng)
             parent[v] = u;    // Gán cha của v là u
             if (DFS(v)) {     // Gọi đệ quy DFS cho đỉnh v
                 return true;  // Nếu tìm thấy chu trình, trả về true
             }
-        } else if (v != parent[u]) {  // Nếu v đã được duyệt và không phải là
-                                      // cha của u
+        } else if (color[v] == 1) {  // Nếu v đang duyệt (màu xám)
             st = u;       // Gán đỉnh đầu là u
             en = v;       // Gán đỉnh cuối là v
             return true;  // Tìm thấy chu trình, trả về true
         }
     }
+    color[u] = 2;  // Đánh dấu đỉnh u đã duyệt (màu đen)
     return false;  // Không tìm thấy chu trình, trả về false
 }
-bool BFS(int u) {
-    queue<int> q;
-    q.push(u);
-    visited[u] = true;  // Đánh dấu đỉnh u đã được duyệt
-    while (!q.empty()) {
-        int v = q.front();
-        q.pop();
-        for (int w : adj[v]) {  // Duyệt qua các đỉnh kề với v
-            if (!visited[w]) {  // Nếu đỉnh w chưa được duyệt
-                visited[w] = true;  // Đánh dấu đỉnh w đã được duyệt
-                q.push(w);          // Thêm w vào hàng đợi
-                parent[w] = v;     // Gán cha của w là v
-            } else if (w != parent[v]) {  // Nếu w đã được duyệt và không phải là cha của v
-                st = v;       // Gán đỉnh đầu là v
-                en = w;       // Gán đỉnh cuối là w
-                return true;  // Tìm thấy chu trình, trả về true
-            }
-        }
-    }
-    return false;  // Không tìm thấy chu trình, trả về false
-}
+
 int main() {
     InputGraph();
     bool hasCycle = false;
