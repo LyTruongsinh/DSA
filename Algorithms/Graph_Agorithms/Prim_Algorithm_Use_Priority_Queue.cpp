@@ -67,12 +67,14 @@ class Graph
   public:
     Graph();
     void InputGraph();
-    void Prim1(int u);
+    void Prim2(int u);
   private:
     int sodinh;
     int socanh;
     vector<pair<int, int>> adj[MAX]; // lưu danh sách kề có trọng số
     bool used[MAX]; // đánh dấu đỉnh đó thuộc V hay Vmst if(used[i] == true) thì đỉnh i thuộc Vmst ngược lại
+    int parent[MAX]; // lưu cha của đỉnh i
+    int depth[MAX]; // lưu độ sâu của đỉnh i
 };
 Graph::Graph()
 {
@@ -95,52 +97,57 @@ void Graph::InputGraph()
     }
     fin.close();
     memset(used, false, sizeof(used)); // khởi tạo tất cả các đỉnh đều thuộc V
-}
-void Graph::Prim1(int u)
-{
-    vector<Edge> MST;               // Lưu các cạnh của cây khung nhỏ nhất
-    int d = 0;                      // Tổng trọng số của cây khung nhỏ nhất
-    used[u] = true;                 // Đưa đỉnh u vào tập Vmst
-    while (MST.size() < sodinh - 1) // Điều kiện dừng khi có n-1 cạnh tương đương với tập V rỗng
+    for(int i = 1; i <= sodinh; i++)
     {
-        // chọn cạnh có trọng số nhỏ nhất có x thuộc tập V và y thuộc tập Vmst
-        int minWeight = INT_MAX;
-        int X, Y; // Lưu hai đỉnh của cạnh
-        for (int i = 1; i <= sodinh; i++)
+        depth[i] = INT_MAX; // khởi tạo độ sâu của đỉnh i là vô cực
+    }
+}
+void Graph::Prim2(int u)
+{
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> Q; // khai báo hàng đợi ưu tiên
+    vector<Edge> MST; // lưu cây khung nhỏ nhất
+    int d = 0; // tổng trọng số của cây khung nhỏ nhất
+    Q.push({0, u}); // thêm đỉnh u vào hàng đợi ưu tiên
+    while(!Q.empty())
+    {
+        pair<int, int> top = Q.top(); // lấy đỉnh có trọng số nhỏ nhất
+        Q.pop(); // xóa đỉnh đó khỏi hàng đợi ưu tiên
+        int dinh = top.second; // lấy đỉnh
+        int trongso = top.first; // lấy trọng số
+        if(used[dinh]) // nếu đỉnh đó đã được duyệt rồi thì bỏ qua
         {
-            if (used[i]) // Nếu đỉnh i thuộc Vmst
+            continue;
+        }
+        d += trongso; // cộng trọng số vào tổng trọng số
+        used[dinh] = true; // đánh dấu đỉnh đó đã được duyệt
+        if(u != dinh) {
+            MST.push_back({dinh, parent[dinh], trongso}); // thêm cạnh vào cây khung nhỏ nhất
+        }
+        for(auto x : adj[dinh]) // duyệt tất cả các đỉnh kề với đỉnh đó
+        {
+            int v = x.first; // lấy đỉnh kề
+            int w = x.second; // lấy trọng số
+            if(!used[v] && w < depth[v]) // nếu đỉnh kề chưa được duyệt và trọng số nhỏ hơn độ sâu của đỉnh kề
             {
-                for(auto x : adj[i]) // Duyệt tất cả các đỉnh kề với i và trọng số của cạnh bắt đầu từ đỉnh i
-                {
-                    int v = x.first; // Đỉnh kề
-                    int w = x.second; // Trọng số cạnh
-                    if(!used[v] && w < minWeight) // Nếu đỉnh kề v không thuộc Vmst và thuộc V
-                    {
-                        minWeight = w; // Cập nhật trọng số nhỏ nhất
-                        X = v; // Lưu đỉnh kề của i
-                        Y = i; // Lưu đỉnh i
-                    }
-                    
-                }
+                depth[v] = w; // cập nhật độ sâu của đỉnh kề
+                parent[v] = dinh; // cập nhật cha của đỉnh kề
+                Q.push({w, v}); // thêm đỉnh kề vào hàng đợi ưu tiên
             }
         }
-        MST.push_back({Y, X, minWeight}); // Thêm cạnh vào cây khung nhỏ nhất
-        d += minWeight; // Cộng trọng số vào tổng trọng số
-        used[X] = true; // Đưa đỉnh X vào tập Vmst Xóa đinh X trong V
     }
     ofstream fout("output.txt");
+    fout << "Tong trong so cua cay khung nho nhat la: " << d << endl;
     fout << "Cay khung nho nhat la: " << endl;
-    for (int i = 0; i < MST.size(); i++)
+    for(int i = 0; i < MST.size(); i++)
     {
-        fout << "(" << MST[i].dinhdau << "," << MST[i].dinhcuoi << ") : " << MST[i].trongso << endl;
+        fout << MST[i].dinhcuoi << " " << MST[i].dinhdau << " " << MST[i].trongso << endl;
     }
-    fout << "Tong trong so: " << d << endl;
     fout.close();
 }
 int main()
 {
     Graph g;
     g.InputGraph();
-    g.Prim1(1); // Bắt đầu từ đỉnh 1
+    g.Prim2(1); // Bắt đầu từ đỉnh 1
     return 0;
 }
