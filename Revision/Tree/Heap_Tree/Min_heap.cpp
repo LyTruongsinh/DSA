@@ -20,6 +20,7 @@ public:
     int extractMin();
     void deleteValue(int value);
     int getMin();
+    int getMax();
     bool isEmpty();
     void printHeap();
 };
@@ -80,6 +81,18 @@ int MinHeap::extractMin() {
 int MinHeap::getMin() {
     if (size > 0) {
         return heap[0];
+    } else {
+        cout << "Heap is empty!" << endl;
+        return -1; // Return a sentinel value to indicate the heap is empty
+    }
+}
+int MinHeap::getMax() {
+    if (size > 0) {
+        int maxValue = heap[0];
+        for (int i = 1; i < size; i++) {
+            maxValue = max(maxValue, heap[i]);
+        }
+        return maxValue;
     } else {
         cout << "Heap is empty!" << endl;
         return -1; // Return a sentinel value to indicate the heap is empty
