@@ -1,20 +1,16 @@
 #include <iostream>
 using namespace std;
 
-// Hàm Selection Sort
-void selection_sort(int A[], int n) {
+void bubble_sort(int A[], int n) {
     for (int i = 0; i < n - 1; i++) {
-        int min_idx = i;
-        for (int j = i + 1; j < n; j++) {
-            if (A[j] < A[min_idx]) {
-                min_idx = j;
+        for(int j = i + 1; j < n; j++) {
+            if (A[i] > A[j]) {
+                swap(A[i], A[j]);
             }
         }
-        swap(A[i], A[min_idx]);
     }
 }
 
-// Hàm in mảng
 void print_array(int A[], int n) {
     for (int i = 0; i < n; i++) {
         cout << A[i] << " ";
@@ -22,15 +18,14 @@ void print_array(int A[], int n) {
     cout << endl;
 }
 
-// Hàm chính
 int main() {
-    int A[] = {64, 25, 12, 22, 11};
+    int A[] = {64, 34, 25, 12, 22, 11, 90};
     int n = sizeof(A) / sizeof(A[0]);
 
     cout << "Mang ban dau: ";
     print_array(A, n);
 
-    selection_sort(A, n);
+    bubble_sort(A, n);
 
     cout << "Mang sau khi sap xep tang dan: ";
     print_array(A, n);
