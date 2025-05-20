@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cstring>
 using namespace std;
 int n, m; // số lượng đỉnh , cạnh
 vector<int> adj[1001];
@@ -14,16 +15,16 @@ void input() {
     memset(visited, false, sizeof(visited));
 }
 void dfs(int u) {
-    cout << u <<" ";
-    // Đánh dấu u đã được thăm 
-    visited[u] = true;
-    for(int i: adj[u]) {
-        // nếu đỉnh u chưa được thăm
-        if(!visited[u]) {
+    cout << u << " ";
+    visited[u] = true;  // đánh dấu đã thăm
+
+    for (int i : adj[u]) {
+        if (!visited[i]) {  // kiểm tra đỉnh kề chưa được thăm
             dfs(i);
         }
     }
 }
+
 int main() {
     input();
     dfs(1); // bắt đầu thăm từ đ��nh 1
