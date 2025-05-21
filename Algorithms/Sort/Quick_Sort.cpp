@@ -12,11 +12,11 @@ void quick_sort(int start, int end)
     int left = start, right = end;
     while (left <= right)
     {
-        while (A[left] < pivot) // Tìm phần tử lớn hơn pivot
+        while (A[left] < pivot) // Tìm phần tử lớn hơn hoặc bằng pivot
         {
             left++;
         }
-        while (A[right] > pivot) // Tìm phần tử nhỏ hơn pivot
+        while (A[right] > pivot) // Tìm phần tử nhỏ hơn hoặc bằng pivot
         {
             right--;
         }
