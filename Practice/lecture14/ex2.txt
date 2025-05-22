@@ -1,0 +1,34 @@
+Function findSmallestOdd(head):
+    If head is NULL:
+        Return -1  // danh sách rỗng
+
+    minOdd ← ∞
+    current ← head
+
+    While current is not NULL:
+        If current.value is odd:
+            If current.value < minOdd:
+                minOdd ← current.value
+        current ← current.next
+
+    If minOdd == ∞:
+        Return -1  // không có số lẻ nào
+    Else:
+        Return minOdd
+
+
+
+Function removeAllOdd(head):
+    // Xử lý các phần tử đầu tiên là số lẻ
+    While head is not NULL and head.value is odd:
+        head ← head.next
+
+    current ← head
+
+    While current is not NULL and current.next is not NULL:
+        If current.next.value is odd:
+            current.next ← current.next.next
+        Else:
+            current ← current.next
+
+    Return head

@@ -1,0 +1,9 @@
+Kiểu dữ liệu Số phức là một cấu trúc toán học và lập trình dùng để biểu diễn và thao tác với các số có phần thực và phần ảo. Một số phức được biểu diễn dưới dạng a + bi, trong đó a là phần thực, b là phần ảo, và i là đơn vị ảo thỏa mãn i² = -1.
+
+Số phức được sử dụng rộng rãi trong các lĩnh vực như kỹ thuật, vật lý, xử lý tín hiệu và toán học ứng dụng – nơi các phép toán với căn bậc hai của số âm thường xuyên xuất hiện.
+
+Trong lập trình, nhiều ngôn ngữ đã hỗ trợ sẵn kiểu dữ liệu số phức, chẳng hạn như complex trong Python, std::complex trong C++, hoặc thông qua thư viện bên ngoài trong JavaScript. Các kiểu dữ liệu này thường hỗ trợ các phép toán cơ bản như: cộng, trừ, nhân, chia; cũng như các phép toán nâng cao như liên hợp (conjugate), độ lớn (modulus), và chuyển đổi sang dạng cực (polar form).
+
+Về mặt cài đặt, một số phức thường được biểu diễn bằng hai giá trị số thực (float hoặc double), tương ứng với phần thực và phần ảo. Việc trừu tượng hóa kiểu dữ liệu này giúp lập trình viên làm việc với số phức một cách thuận tiện và chính xác hơn, không cần xử lý thủ công các phép toán phức tạp.
+
+Kiểu dữ liệu số phức đóng vai trò quan trọng trong việc mô hình hóa các bài toán toán học và kỹ thuật phức tạp, nâng cao khả năng tính toán và độ chính xác của các thuật toán khoa học.

@@ -1,0 +1,12 @@
+Sắp xếp theo độ phức tạp tăng dần
+4nlog(n) + 2n : O(nlog(n))
+2^10 : O(1)
+2^log(n) : O(n)
+3n + 100log(n) : O(n)
+4n : O(n)
+2^n : O(2^n)
+n^2 + 10n : O(n^2)
+n^3 : O(n^3)
+nlog(n) : O(nlog(n))
+
+2^10 < 2^(log(n)) < 3n + 100log(n) < 4n < nlog(n) < 4nlog(n) < n^3 < 2^n

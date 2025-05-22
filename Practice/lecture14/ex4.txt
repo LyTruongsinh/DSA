@@ -1,0 +1,20 @@
+Tính giá trị của 2^n bằng hai mã giả
+Function1(int n)
+    int tich = 1;
+    for(int i = 1 ; i <= n ; i++) {
+        tich*=2;
+    }
+    return tich
+    O(n)
+
+Function2(int n)
+    if(n = 0) return 1
+    if(n = 1) return 2
+    int temp = Function2(n/2)
+    if(n % 2 = 0) {
+        return Function2(n/2)*Function2(n/2)
+    }
+    else {
+        return Function2(n/2)*Function2(n/2)*2
+    }
+    O(log(n))

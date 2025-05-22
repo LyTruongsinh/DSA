@@ -1,0 +1,4 @@
+Find the order of nodes in preorder, postorder, and inorder traversals
+Preorder : 39 70 53 24 48 61 83 72 16
+Inorder : 24 53 48 70 61 39 72 83 16
+Postorder : 24 48 53 61 70 72 16 83 39
