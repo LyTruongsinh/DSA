@@ -1,23 +1,31 @@
+// Cho một dãy gồm n số nguyên A(1) ... A(n), nhiệm vụ của bạn là:
+// Tìm dãy con dài nhất (không nhất thiết phải liên tiếp) sao cho các giá trị trong dãy con này tạo thành một dãy tăng nghiêm ngặt (strictly increasing).
 #include <iostream>
+#include <vector>
 using namespace std;
-int main() {
+int main() 
+{
     int N;
     cin >> N;
     int A[N], dp[N], pr[N];
-    for (int i = 0; i < N; i++) {
+    for(int i = 0; i < N;) {
         cin >> A[i];
         dp[i] = 1;
-        pr[i] = -1; 
+        pr[i] = -1;
     }
     int max_l = 1, ei = 0;
-    for (int i = 1; i < N; i++) {
-        for (int j = 0; j < i; j++) {
-            if (A[i] > A[j] && dp[i] < dp[j] + 1) {
+    for(int i = 0; i < N; i++)
+    {
+        for(int j = 0; j < i;j++)
+        {
+            if(A[i] > A[j] && dp[i] < dp[j] + 1)
+            {
                 dp[i] = dp[j] + 1;
                 pr[i] = j;
             }
         }
-        if (dp[i] > max_l) {
+        if(dp[i] > max_l)
+        {
             max_l = dp[i];
             ei = i;
         }
@@ -34,3 +42,4 @@ int main() {
     }
     return 0;
 }
+

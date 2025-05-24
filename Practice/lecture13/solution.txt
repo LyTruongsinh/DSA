@@ -1,0 +1,105 @@
+1. XML Tag Matching
+Regular expression: /<[^>]+>/
+
+Matches:
+
+<opentag>
+
+<closetag>
+
+</closetag>
+
+<with attribute="77">
+
+Does not match:
+
+<an xml tag> (contains spaces)
+
+<> (no content between tags)
+
+2. Pattern Matching /a.[bc]+/
+Explanation: Matches 'a' followed by any character, followed by one or more 'b' or 'c'
+
+Matches:
+
+abc
+
+abbbbbbbb
+
+azc
+
+abcbcbcbc
+
+azccbbbbcbccc
+
+Does not match:
+
+ac (missing character between 'a' and 'c')
+
+3. Complex Pattern Matching /(very )+(fat )?(tall|ugly) man/
+Matches:
+
+very fat man
+
+very very fat ugly man
+
+very very very tall man
+
+Does not match:
+
+fat tall man (missing "very")
+
+4. Dot-Separated Pattern
+Regular expression: /^..\...\...\...$/
+
+Explanation:
+
+^ start of string
+
+.. any two characters
+
+\. literal dot (separator)
+
+Repeated pattern for each segment
+
+$ end of string
+
+5. Phone Number Patterns
+Regular expression: /^\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}$/
+
+Explanation:
+
+^ start of string
+
+\(? optional opening parenthesis
+
+\d{3} exactly 3 digits
+
+\)? optional closing parenthesis
+
+[-. ]? optional separator (hyphen, dot, or space)
+
+Repeated pattern for middle 3 digits
+
+\d{4} exactly 4 digits
+
+$ end of string
+
+6. Valid String with Separators
+Regular expression: /^[a-zA-Z0-9]+(?:[-_ ][a-zA-Z0-9]+)*$/
+
+Explanation:
+
+^ start of string
+
+[a-zA-Z0-9]+ one or more alphanumeric characters
+
+(?: non-capturing group for:
+
+[-_ ] single separator (hyphen, underscore, or space)
+
+[a-zA-Z0-9]+ one or more alphanumeric characters
+
+)* repeat the group zero or more times
+
+$ end of string
