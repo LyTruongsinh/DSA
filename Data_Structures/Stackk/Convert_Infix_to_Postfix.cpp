@@ -6,7 +6,16 @@ using namespace std;
 
 vector<char> result;
 
-void infixToPostfix(const vector<char> infix)
+int precedence(char op)
+{
+    if (op == '+' || op == '-')
+        return 1;
+    if (op == '*' || op == '/')
+        return 2;
+    return 0;
+}
+
+void infixToPostfix(const vector<char> &infix)
 {
     stack<char> s;
     for (int i = 0; i < infix.size(); i++)
@@ -15,34 +24,31 @@ void infixToPostfix(const vector<char> infix)
         {
             result.push_back(infix[i]);
         }
-        else
+        else if (infix[i] == '(')
         {
-            if (infix[i] == '(')
+            s.push(infix[i]);
+        }
+        else if (infix[i] == ')')
+        {
+            while (!s.empty() && s.top() != '(')
             {
-                s.push(infix[i]);
+                result.push_back(s.top());
+                s.pop();
             }
-            else if (infix[i] == ')')
+            if (!s.empty())
+                s.pop(); // Bỏ '('
+        }
+        else // toán tử
+        {
+            while (!s.empty() && precedence(s.top()) >= precedence(infix[i]))
             {
-                while (!s.empty())
-                {
-                    
-                    result.push_back(s.top());
-                    s.pop();
-                    if (!s.empty() && s.top() == '(')
-                    {
-                        s.pop(); // Bỏ dấu ngoặc mở
-                    }
-                }
+                result.push_back(s.top());
+                s.pop();
             }
-            else
-            {
-                // Nếu là toán tử, đẩy vào stack (chưa xét ưu tiên)
-                s.push(infix[i]);
-            }
+            s.push(infix[i]);
         }
     }
 
-    // Sau vòng lặp, pop hết còn lại trong stack
     while (!s.empty())
     {
         result.push_back(s.top());
@@ -52,7 +58,7 @@ void infixToPostfix(const vector<char> infix)
 
 int main()
 {
-    vector<char> infix = {'8', '/', '4', '*', '2'};
+    vector<char> infix = {'(', '5', '-', '2', '+', '3', ')', '+', '4', '*', '(', '8', '-', '5', '*', '4', ')'};
     infixToPostfix(infix);
 
     for (char c : result)
