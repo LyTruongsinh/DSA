@@ -54,7 +54,7 @@ void mergeSort(vector<int> &arr, int left, int right)
 
 int main()
 {
-    vector<int> arr = {12, 5, 7, 22, 2, 11, 30, 104, 20};
+    vector<int> arr = {7, 3, 5, 0, 8, 1, 2, 9, 4, 6};
 
     mergeSort(arr, 0, arr.size() - 1);
 

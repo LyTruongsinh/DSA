@@ -3,7 +3,7 @@
 
 #define MAX 1000
 using namespace std;
-int A[MAX];
+int A[10] = {7, 3, 5, 0, 8, 1, 2, 9, 4, 6};
 void quick_sort(int start, int end)
 {
     if (start >= end)
@@ -20,12 +20,14 @@ void quick_sort(int start, int end)
         {
             right--;
         }
-        if (left <= right)
+        cout << "left: " << left << " right: " << right << endl;
+        if (left <= right) // cho trường lợp A[left] == A[right] == pivot
         {
             swap(A[left], A[right]);
             left++;
             right--;
         }
+        cout << "left: " << left << " right: " << right << endl;
     }
     quick_sort(start, right); // Đệ quy bên trái
     quick_sort(left, end);    // Đệ quy bên phải
@@ -33,14 +35,8 @@ void quick_sort(int start, int end)
 
 int main()
 {
-    int N;
-    cin >> N;
-    for (int i = 0; i < N; i++)
-    {
-        cin >> A[i];
-    }
-    quick_sort(0, N - 1);
-    for (int i = 0; i < N; i++)
+    quick_sort(0, 9);
+    for (int i = 0; i < 10; i++)
     {
         cout << A[i] << " ";
     }
