@@ -69,21 +69,7 @@ class FloydWarshall
         cout << endl;
     }
 
-    void PrintAllDistances()
-    {
-        cout << "Ma tran khoang cach ngan nhat:\n";
-        for (int i = 1; i <= n; i++)
-        {
-            for (int j = 1; j <= n; j++)
-            {
-                if (dist[i][j] >= LLONG_MAX / 2)
-                    cout << "INF ";
-                else
-                    cout << dist[i][j] << " ";
-            }
-            cout << endl;
-        }
-    }
+   +++
 };
 
 int main()
