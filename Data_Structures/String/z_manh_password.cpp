@@ -4,9 +4,9 @@ using namespace std;
 int countPassword = 0;
 void generatePassord(string current, int n, int p, int zCount)
 {
-    if(current.length() == n)
+    if (current.length() == n)
     {
-        if(zCount >= p)
+        if (zCount >= p)
         {
             cout << current << endl;
             countPassword++;
@@ -15,14 +15,18 @@ void generatePassord(string current, int n, int p, int zCount)
     }
 
     // Cắt nhánh nếu không đủ số lượng chữ 'z'
-    if((n - current.length()) + zCount < p)
+    if ((n - current.length()) + zCount < p)
         return;
-    for(char c = 'a'; c <= 'z'; c++)
+    for (char c = 'a'; c <= 'z'; c++)
     {
-        if(c == 'z')
+        if (c == 'z')
+        {
             generatePassord(current + c, n, p, zCount + 1);
+        }
         else
+        {
             generatePassord(current + c, n, p, zCount);
+        }
     }
 }
 int main()

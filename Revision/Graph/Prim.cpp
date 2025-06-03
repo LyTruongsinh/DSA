@@ -37,7 +37,8 @@ void Prim(int u)
     while (MST.size() < sodinh - 1)
     {
         int minweight = INT_MAX;
-        int X, Y for (int i = 1; i <= sodinh; i++)
+        int V, U;
+        for (int i = 1; i <= sodinh; i++)
         {
             if (Vmst[i])
             {
@@ -48,15 +49,14 @@ void Prim(int u)
                     if (!Vmst && w < minweight)
                     {
                         minweight = w;
-                        X = v;
-                        Y = i;
+                        V = v;
+                        U = i;
                     }
                 }
             }
         }
-        MST.push_back({Y, X, minweight});
-        totalweight += minweight
-        Vmst[X] = true;
+        MST.push_back({U, V, minweight});
+        totalweight += minweight Vmst[X] = true;
     }
     cout << "Cay khung nho nhat la: " << endl;
     for (int i = 0; i < MST.size(); i++)
@@ -65,7 +65,8 @@ void Prim(int u)
     }
     cout << "Tong trong so: " << d << endl;
 }
-int main() {
+int main()
+{
     Input();
     Prim(1);
     return 0;
