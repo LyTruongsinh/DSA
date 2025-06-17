@@ -9,9 +9,9 @@ using namespace std;
 int n, m;
 char a[1001][1001];
 bool visited[1001][1001];
-int dx[] = {-1, 0, 0, 1};
-int dy[] = {0, -1, 1, 0};
-int distance[1001][1001];
+int dx[] = {-1, 0, 1, 0};
+int dy[] = {0, -1, 0, 1};
+int dist[1001][1001];
 int endi;
 int endj;
 void dfs(int i, int j)
@@ -41,7 +41,7 @@ void bfs(int i, int j)
     {
         pair<int, int> top = q.front();
         q.pop();
-        if(top.first == endi && top.second == endj)
+        if (top.first == endi && top.second == endj)
         {
             cout << "Đã tìm thấy đích tại ô (" << endi << ", " << endj << ")\n";
             return;
@@ -55,7 +55,7 @@ void bfs(int i, int j)
             {
                 q.push({i1, j1});
                 visited[i1][j1] = true;
-                distance[i1][j1] = distance[top.first][top.second] + 1;
+                dist[i1][j1] = dist[top.first][top.second] + 1;
             }
         }
     }

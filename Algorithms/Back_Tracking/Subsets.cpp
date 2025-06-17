@@ -1,11 +1,12 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
+
 using namespace std;
 
 class Solution
 {
-private:
+  private:
     int n, k, isfinal;
 
     void Gen_K_Combination(vector<int> &a)
@@ -31,7 +32,7 @@ private:
         }
     }
 
-public:
+  public:
     vector<vector<int>> subsets(vector<int> &nums)
     {
         vector<vector<int>> res;
@@ -62,7 +63,7 @@ public:
 int main()
 {
     Solution s;
-    vector<int> nums = {1, 2, 3,4,5};
+    vector<int> nums = {1, 2, 3, 4, 5};
     vector<vector<int>> res = s.subsets(nums);
     for (auto subset : res)
     {

@@ -1,5 +1,6 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
+
 using namespace std;
 struct TreeNode
 {
@@ -18,7 +19,7 @@ struct TreeNode
 };
 class Solution
 {
-public:
+  public:
     int minDepth(TreeNode *root)
     {
         if (root == NULL)

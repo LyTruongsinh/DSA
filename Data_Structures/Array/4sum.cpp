@@ -29,7 +29,7 @@ class Solution {
                         right--;
                     }
                 }
-            }tại
+            }
         }
         return result;
     }

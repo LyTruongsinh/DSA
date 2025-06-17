@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+void bubble_sort(int A[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for(int j = i + 1; j < n; j++) {
+            if (A[i] > A[j]) {
+                swap(A[i], A[j]);
+            }
+        }
+    }
+}
+
+void print_array(int A[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << A[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    int A[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(A) / sizeof(A[0]);
+
+    cout << "Mang ban dau: ";
+    print_array(A, n);
+
+    bubble_sort(A, n);
+
+    cout << "Mang sau khi sap xep tang dan: ";
+    print_array(A, n);
+
+    return 0;
+}
